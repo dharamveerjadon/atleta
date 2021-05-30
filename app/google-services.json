@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "559086225398",
+    "firebase_url": "https://atleta-50709-default-rtdb.firebaseio.com",
+    "project_id": "atleta-50709",
+    "storage_bucket": "atleta-50709.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559086225398:android:a9ffa1cd386171a327e9d7",
+        "android_client_info": {
+          "package_name": "com.atleta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "559086225398-9vpuemb76ntl6s7d06c5n7r2vi51bip1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZH13DXNJZ-aAAlIVZ3iSBnvkLi9sNric"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559086225398-9vpuemb76ntl6s7d06c5n7r2vi51bip1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

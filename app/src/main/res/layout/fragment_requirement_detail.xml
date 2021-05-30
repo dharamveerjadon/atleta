@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.CongratulationFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <com.atleta.customview.AtletaTextView
+                    style="@style/AppTheme.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Client’s \nRequirement"
+                    android:textColor="@android:color/black"
+                    android:textSize="40sp"
+                    android:layout_marginTop="@dimen/margin_default_octuple"
+                    android:textFontWeight="700"
+                    app:appFont="Poppins-Bold"
+                    />
+
+
+                <com.atleta.customview.AtletaTextView
+                    style="@style/AppTheme.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Have a look and take ACTION !"
+                    android:textColor="@android:color/black"
+                    app:appFont="Poppins-Regular"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical">
+
+                    <com.atleta.customview.AtletaTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        style="@style/AppTheme.TextView"
+                        android:padding="4dp"
+                        android:text="Job Name"
+                        android:textSize="14sp"
+                        app:appFont="Poppins-Regular"/>
+
+
+                    <com.atleta.customview.AtletaTextView
+                        android:id="@+id/txt_job_name"
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        app:appFont="Poppins-Bold"
+                        android:textFontWeight="700"
+                        tools:text="Year Of Experience" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/colorBlack"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <com.atleta.customview.AtletaTextView
+                                android:id="@+id/txt_budgets"
+                                style="@style/AppTheme.TextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:padding="4dp"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="18sp"
+                                app:appFont="Poppins-Bold"
+                                android:textFontWeight="700"
+                                tools:text="$200" />
+
+
+                            <com.atleta.customview.AtletaTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                style="@style/AppTheme.TextView"
+                                android:padding="4dp"
+                                app:appFont="Poppins-Regular"
+                                android:text="Tentative Budgets"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:background="@color/colorWhite" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <com.atleta.customview.AtletaTextView
+                                android:id="@+id/txt_year_of_experience"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                style="@style/AppTheme.TextView"
+                                android:padding="4dp"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="18sp"
+                                app:appFont="Poppins-Bold"
+                                android:textFontWeight="700"
+                                tools:text="8 years" />
+
+
+                            <com.atleta.customview.AtletaTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                style="@style/AppTheme.TextView"
+                                android:padding="4dp"
+                                android:text="Experience required"
+                                app:appFont="Poppins-Regular"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.atleta.customview.AtletaTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        style="@style/AppTheme.TextView"
+                        android:text="Job Decription"
+                        app:appFont="Poppins-Regular"
+                        android:textSize="14sp" />
+
+
+                    <com.atleta.customview.AtletaTextView
+                        android:id="@+id/txt_job_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        style="@style/AppTheme.TextView"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        app:appFont="Poppins-Bold"
+                        android:textFontWeight="700"
+                        tools:text="Year Of Experience" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@color/colorAccent" />
+
+
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        app:appFont="Poppins-Regular"
+                        android:text="Job Category"
+                        android:textSize="14sp" />
+
+
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:id="@+id/txt_job_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        app:appFont="Poppins-Bold"
+                        android:textFontWeight="700"
+                        tools:text="Year Of Experience" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@color/colorAccent" />
+
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        app:appFont="Poppins-Regular"
+                        android:text="Skills required"
+                        android:textSize="14sp" />
+
+
+                    <LinearLayout
+                        android:id="@+id/lnr_skill"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="4dp"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <com.atleta.customview.SpinnerView
+        android:id="@+id/spinnerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+</RelativeLayout>
