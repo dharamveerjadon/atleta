@@ -190,13 +190,13 @@ public class AppPreferences {
      * @return the session
      */
     public static Session getSession() {
-                if (userSession == null) {
-                    String json = mSharedPreferences.getString(SESSION, null);
-                    if (TextUtils.isEmpty(json)) {
-                        userSession = new Session();
-                    } else {
-                        userSession = new Gson().fromJson(json, Session.class);
-                    }
+        if (userSession == null) {
+            String json = mSharedPreferences.getString(SESSION, null);
+            if (TextUtils.isEmpty(json)) {
+                userSession = new Session();
+            } else {
+                userSession = new Gson().fromJson(json, Session.class);
+            }
         }
         return userSession;
     }

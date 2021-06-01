@@ -25,8 +25,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.atleta.R;
 import com.atleta.customview.TabBar;
-import com.atleta.fragments.CongratulationFragment;
-import com.atleta.fragments.MyJobsFragment;
+import com.atleta.fragments.MessageFragment;
 import com.atleta.fragments.MyProfileFragment;
 import com.atleta.fragments.FeedsFragment;
 import com.atleta.interfaces.MenuItemInteraction;
@@ -85,12 +84,6 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
 
         Session session = AppPreferences.getSession();
 
-        if (getIntent() != null) {
-            mobileNumber = getIntent().getStringExtra(Keys.MOBILE_NUMBER);
-            isFirstEntry = getIntent().getBooleanExtra("isFirst", false);
-        }
-
-
         mobileNumber = TextUtils.isEmpty(session.getUserModel().getMobileNumber()) ? mobileNumber : session.getUserModel().getMobileNumber();
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -118,8 +111,8 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
 
         mTabBar = findViewById(R.id.tab_bar);
         List<MenuItem> items = new ArrayList<>();
-        items.add(new MenuItem(R.string.string_timeline, R.drawable.ic_timeline_grey));
-        items.add(new MenuItem(R.string.string_my_job, R.drawable.ic_job_grey));
+        items.add(new MenuItem(R.string.string_home, R.drawable.ic_home_black));
+        items.add(new MenuItem(R.string.string_message, R.drawable.ic_profile_grey));
         items.add(new MenuItem(R.string.string_profile, R.drawable.ic_profile_grey));
         mTabBar.setMenuItems(items);
 
@@ -128,11 +121,11 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
             @Override
             public void onMenuClick(MenuItem menuItem) {
                 switch (menuItem.textResId) {
-                    case R.string.string_timeline:
+                    case R.string.string_home:
                         addTimeLineFragment();
                         break;
-                    case R.string.string_my_job:
-                        addMyJobFragment();
+                    case R.string.string_message:
+                        addMessageFragment();
                         break;
                     case R.string.string_profile:
                         addMyProfileFragment();
@@ -160,8 +153,7 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
 
         lnrEditIconProfile.setOnClickListener(v -> {
             Session editSession = AppPreferences.getSession();
-            AppPreferences.setSelectedHomeScreen(SELECTED_HOME_SCREEN, 2);
-            Intent intent = new Intent(MainActivity.this, UserProfilePreferences.class);
+            Intent intent = new Intent(MainActivity.this, UserProfilePreferencesActivity.class);
             intent.putExtra(Keys.MOBILE_NUMBER, editSession.getUserModel().getMobileNumber());
             startActivity(intent);
         });
@@ -238,12 +230,12 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
 
                                 MyJobsModel model = new MyJobsModel(jobname, description, date, category, yearofexperience, skills, budgets, "", key);
                                 if (!TextUtils.isEmpty(jobname) && !TextUtils.isEmpty(description)) {
-                                    openCongratulationScreen(CongratulationFragment.newInstance("Congratulation", model));
+
                                 }
                                 break;
 
                             case Keys.TYPE_PROFILE_SELECTED:
-                                addMyJobFragment();
+                                addMessageFragment();
 
                                 break;
 
@@ -321,7 +313,7 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
                 return;
             } else {
                 Fragment fragment = getTopFragment();
-                if (fragment != null && fragment instanceof MyJobsFragment) {
+                if (fragment != null && fragment instanceof MessageFragment) {
                     mTabBar.setSelectedIndex(1, false);
                 } else if (fragment != null && fragment instanceof MyProfileFragment) {
                     mTabBar.setSelectedIndex(2, false);
@@ -340,14 +332,14 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
         closeDrawers();
 
         switch (item.textResId) {
-            case R.string.string_timeline:
+            case R.string.string_home:
                 mTabBar.setSelectedIndex(0, false);
                 addTimeLineFragment();
                 break;
 
-            case R.string.string_my_job:
+            case R.string.string_message:
                 mTabBar.setSelectedIndex(1, false);
-                addMyJobFragment();
+                addMessageFragment();
                 break;
 
             case R.string.string_logout:
@@ -370,7 +362,7 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
         lnrEditIconProfile.setVisibility(View.INVISIBLE);
         FragmentManager fm = getSupportFragmentManager();
         fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        FeedsFragment fragment = FeedsFragment.newInstance(getString(R.string.string_timeline));
+        FeedsFragment fragment = FeedsFragment.newInstance(getString(R.string.string_feed));
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
@@ -379,11 +371,11 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
     /**
      * Add the job fragment
      */
-    private void addMyJobFragment() {
+    private void addMessageFragment() {
         lnrEditIconProfile.setVisibility(View.INVISIBLE);
         FragmentManager fm = getSupportFragmentManager();
         fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        MyJobsFragment fragment = MyJobsFragment.newInstance(getString(R.string.string_my_job));
+        MessageFragment fragment = MessageFragment.newInstance(getString(R.string.string_feed));
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();

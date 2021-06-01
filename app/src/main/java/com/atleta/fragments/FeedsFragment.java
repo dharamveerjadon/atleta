@@ -25,7 +25,6 @@ public class FeedsFragment extends BaseFragment {
     private Session session;
 
 
-
     public static FeedsFragment newInstance(String title) {
         FeedsFragment fragment = new FeedsFragment();
         Bundle args = new Bundle();
@@ -42,15 +41,9 @@ public class FeedsFragment extends BaseFragment {
         // Set title
         setToolbarTitle(getTitle());
         View view =  inflater.inflate(R.layout.fragment_feeds, container, false);
+        session = AppPreferences.getSession();
         viewById(view);
 
-/*
-        if (mSelectedSubIndex > 0) {
-            mSelectedSubIndex = Math.min(mSelectedSubIndex, mSubMenuItems.size() - 1);
-            mViewPager.setCurrentItem(mSelectedSubIndex);
-        }*/
-
-        /*getdata();*/
         return view;
     }
 
@@ -96,13 +89,13 @@ public class FeedsFragment extends BaseFragment {
         public Fragment getItem(int position) {
             Fragment fragment = null;
             if (position ==  0)
-                fragment = WaitingFragment.newInstance("Waiting");
+                fragment = FeedPostFragment.newInstance("All Post");
 
             if(position == 1)
-                fragment = ClosedFragment.newInstance("Closed");
+                fragment = FeedPostFragment.newInstance("Trending");
 
             if(position == 2)
-                fragment = AllRequirementFragment.newInstance("All Requirement");
+                fragment = FeedPostFragment.newInstance("Challenges");
 
 
        return fragment;
@@ -111,21 +104,24 @@ public class FeedsFragment extends BaseFragment {
         //Overridden method getCount to get the number of tabs
         @Override
         public int getCount() {
-            session = AppPreferences.getSession();
-            return session.isAdmin() ? 3 : 2;
+
+            return AppPreferences.getSession().isAdmin() ? 4 : 3;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             String title = null;
             if (position == 0)
-                title = "WAITING";
+                title = "All Post";
 
              if (position == 1)
-                title = "CLOSED";
+                title = "Trending";
 
             if (position == 2)
-                title = "ALL";
+                title = "Challenges";
+
+            if (position == 3)
+                title = "Admin";
 
             return title;
         }

@@ -3,7 +3,6 @@ package com.atleta.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +24,10 @@ import com.atleta.utils.AppPreferences;
 import com.atleta.utils.AtletaApplication;
 import com.atleta.utils.Keys;
 import com.atleta.utils.Utils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,25 +40,24 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-import static com.atleta.utils.AppPreferences.SELECTED_HOME_SCREEN;
-
-public class UserProfilePreferences extends BaseActivity implements View.OnClickListener {
+public class UserProfilePreferencesActivity extends BaseActivity implements View.OnClickListener {
     private static final int DOCUMENT_CODE = 07;
     private static DatabaseReference mDatabase;
     private EditText mEdtDisplayName, mEdtFirstName, mEdtMiddleName, mEdtLastName, mEdtEmailId, mEdtContactNumber,
             mEdtLocation;
     private Button mBtnSubmit;
-    private CardView mCardViewBasketBall, mCardViewFootball, mCardViewCricket, mCardViewBadminton;
+    private CardView mCardViewBasketBall, mCardViewFootball, mCardViewCricket, mCardViewFitness;
     private Uri imageuri;
     private ProgressDialog dialog;
     private SpinnerView spinnerView;
     private boolean isFirstTime;
     private String profileImage;
     private ProgressBar mProgressBar;
-    private ArrayList<String> preferences = new ArrayList<>();
+    private final ArrayList<String> preferences = new ArrayList<>();
     private ImageView userImageEditIcon, profileImageView;
-    private boolean isBasketCheck, isFootballCheck, isCricketCheck, isBadmintonCheck;
-
+    private boolean isBasketCheck, isFootballCheck, isCricketCheck, isFitnessCheck;
+    private ImageView mImgBasketball, mImgCricket, mImgFootball, mImgFitness;
+    private TextView mTxtBasketball, mTxtCricket, mTxtFootball, mTxtFitness;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,13 +90,23 @@ public class UserProfilePreferences extends BaseActivity implements View.OnClick
         mCardViewBasketBall = findViewById(R.id.cardview_basketball);
         mCardViewFootball = findViewById(R.id.cardview_football);
         mCardViewCricket = findViewById(R.id.cardview_cricket);
-        mCardViewBadminton = findViewById(R.id.cardview_badminton);
+        mCardViewFitness = findViewById(R.id.cardview_fitness);
+
+        mImgBasketball = findViewById(R.id.img_basketball);
+        mImgFootball = findViewById(R.id.img_football);
+        mImgCricket = findViewById(R.id.img_cricket);
+        mImgFitness = findViewById(R.id.img_fitness);
+
+        mTxtBasketball = findViewById(R.id.txt_basketball);
+        mTxtFootball = findViewById(R.id.txt_football);
+        mTxtCricket = findViewById(R.id.txt_cricket);
+        mTxtFitness = findViewById(R.id.txt_fitness);
     }
 
     private void registerListener() {
         mBtnSubmit.setOnClickListener(this);
         userImageEditIcon.setOnClickListener(this);
-        mCardViewBadminton.setOnClickListener(this);
+        mCardViewFitness.setOnClickListener(this);
         mCardViewBasketBall.setOnClickListener(this);
         mCardViewFootball.setOnClickListener(this);
         mCardViewCricket.setOnClickListener(this);
@@ -121,7 +134,7 @@ public class UserProfilePreferences extends BaseActivity implements View.OnClick
                     // calling on cancelled method when we receive
                     // any error or we are not able to get the data.
                     spinnerView.setVisibility(View.GONE);
-                    Toast.makeText(UserProfilePreferences.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserProfilePreferencesActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -132,10 +145,15 @@ public class UserProfilePreferences extends BaseActivity implements View.OnClick
         if (isBasketCheck) {
             isBasketCheck = false;
             mCardViewBasketBall.setCardBackgroundColor(getResources().getColor(R.color.colorWhite));
+            mImgBasketball.setImageResource(R.drawable.ic_basketball_black);
+            mTxtBasketball.setTextColor(getResources().getColor(R.color.colorBlack));
+
             preferences.remove("basketball");
         } else {
             isBasketCheck = true;
             mCardViewBasketBall.setCardBackgroundColor(getResources().getColor(R.color.colorAccent));
+            mImgBasketball.setImageResource(R.drawable.ic_basketball_white);
+            mTxtBasketball.setTextColor(getResources().getColor(R.color.colorWhite));
             preferences.add("basketball");
         }
 
@@ -145,10 +163,14 @@ public class UserProfilePreferences extends BaseActivity implements View.OnClick
         if (isFootballCheck) {
             isFootballCheck = false;
             mCardViewFootball.setCardBackgroundColor(getResources().getColor(R.color.colorWhite));
+            mImgFootball.setImageResource(R.drawable.ic_basketball_black);
+            mTxtFootball.setTextColor(getResources().getColor(R.color.colorBlack));
             preferences.remove("football");
         } else {
             isFootballCheck = true;
             mCardViewFootball.setCardBackgroundColor(getResources().getColor(R.color.colorAccent));
+            mImgFootball.setImageResource(R.drawable.ic_basketball_white);
+            mTxtFootball.setTextColor(getResources().getColor(R.color.colorWhite));
             preferences.add("football");
         }
 
@@ -158,23 +180,31 @@ public class UserProfilePreferences extends BaseActivity implements View.OnClick
         if (isCricketCheck) {
             isCricketCheck = false;
             mCardViewCricket.setCardBackgroundColor(getResources().getColor(R.color.colorWhite));
+            mImgCricket.setImageResource(R.drawable.ic_basketball_black);
+            mTxtCricket.setTextColor(getResources().getColor(R.color.colorBlack));
             preferences.remove("cricket");
         } else {
             isCricketCheck = true;
             mCardViewCricket.setCardBackgroundColor(getResources().getColor(R.color.colorAccent));
+            mImgCricket.setImageResource(R.drawable.ic_basketball_white);
+            mTxtCricket.setTextColor(getResources().getColor(R.color.colorWhite));
             preferences.add("cricket");
         }
 
     }
 
-    private void pressBadmintonPreference() {
-        if (isBadmintonCheck) {
-            isBadmintonCheck = false;
-            mCardViewBadminton.setCardBackgroundColor(getResources().getColor(R.color.colorWhite));
+    private void pressFitnessPreference() {
+        if (isFitnessCheck) {
+            isFitnessCheck = false;
+            mCardViewFitness.setCardBackgroundColor(getResources().getColor(R.color.colorWhite));
+            mImgFitness.setImageResource(R.drawable.ic_basketball_black);
+            mTxtFitness.setTextColor(getResources().getColor(R.color.colorBlack));
             preferences.remove("badminton");
         } else {
-            isBadmintonCheck = true;
-            mCardViewBadminton.setCardBackgroundColor(getResources().getColor(R.color.colorAccent));
+            isFitnessCheck = true;
+            mCardViewFitness.setCardBackgroundColor(getResources().getColor(R.color.colorAccent));
+            mImgFitness.setImageResource(R.drawable.ic_basketball_white);
+            mTxtFitness.setTextColor(getResources().getColor(R.color.colorWhite));
             preferences.add("badminton");
         }
 
@@ -229,7 +259,7 @@ public class UserProfilePreferences extends BaseActivity implements View.OnClick
         }
 
         if (TextUtils.isEmpty(profileImage)) {
-            Utils.showToast(UserProfilePreferences.this, findViewById(R.id.fragment_container), "Please upload resume..");
+            Utils.showToast(UserProfilePreferencesActivity.this, findViewById(R.id.fragment_container), "Please upload resume..");
             return false;
         }
 
@@ -262,30 +292,14 @@ public class UserProfilePreferences extends BaseActivity implements View.OnClick
                 if (isValidation())
                     saveDataToFirebase();
                 break;
-            case R.id.upload_file:
-                String[] supportedMimeTypes = {"application/pdf", "application/msword"};
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    intent.setType(supportedMimeTypes.length == 1 ? supportedMimeTypes[0] : "*/*");
-                    if (supportedMimeTypes.length > 0) {
-                        intent.putExtra(Intent.EXTRA_MIME_TYPES, supportedMimeTypes);
-                    }
-                } else {
-                    String mimeTypes = "";
-                    for (String mimeType : supportedMimeTypes) {
-                        mimeTypes += mimeType + "|";
-                    }
-                    intent.setType(mimeTypes.substring(0, mimeTypes.length() - 1));
-                }
-                startActivityForResult(intent, DOCUMENT_CODE);
-                break;
+
             case R.id.img_edit:
                 Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(pickPhoto, 1);
                 break;
-            case R.id.cardview_badminton:
-                pressBadmintonPreference();
+            case R.id.cardview_fitness:
+                pressFitnessPreference();
                 break;
             case R.id.cardview_basketball:
                 pressBasketPreference();
@@ -309,9 +323,7 @@ public class UserProfilePreferences extends BaseActivity implements View.OnClick
                     mProgressBar.setVisibility(View.VISIBLE);
                     imageuri = data.getData();
                     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-                    final Session session = AppPreferences.getSession();
-                    final UserModel userModel = session.getUserModel();
-                    final String messagePushID = session.getUserModel().getMobileNumber() + "-profile";
+                    final String messagePushID = AppPreferences.getSession().getUserId() + "-profile";
 
                     dialog = new ProgressDialog(this);
                     dialog.setMessage("Uploading");
@@ -332,15 +344,10 @@ public class UserProfilePreferences extends BaseActivity implements View.OnClick
                             final Uri uri = task.getResult();
 
                             profileImage = uri.toString();
-                            UserModel userUpload = new UserModel(userModel.getDisplayName(), userModel.getFirstName(), userModel.getMiddleName(), userModel.getLastName(), userModel.getMobileNumber(), userModel.getLocation(), userModel.getPreference(), userModel.getProfile_image_url());
-                            session.setUserModel(userUpload);
 
                             this.sendBroadcast(new Intent(Keys.BROADCAST_PROFILE_IMAGE));
-                            AtletaApplication.sharedDatabaseInstance().child("Users").child(session.getUserModel().getMobileNumber()).setValue(session)
-                                    .addOnSuccessListener(aVoid -> {
 
-
-                                        /*Glide.with(AtletaApplication.sharedInstance())
+                                        Glide.with(AtletaApplication.sharedInstance())
                                                 .load(uri.toString())
                                                 .listener(new RequestListener<String, GlideDrawable>() {
                                                     @Override
@@ -361,12 +368,9 @@ public class UserProfilePreferences extends BaseActivity implements View.OnClick
                                                 })
                                                 .placeholder(R.drawable.ic_avatar)
                                                 .dontAnimate()
-                                                .into(profileImage);*/
-                                        AppPreferences.setSession(session);
+                                                .into(profileImageView);
                                         dialog.dismiss();
                                         Utils.showToast(this, findViewById(R.id.fragment_container), "Uploaded Successfully");
-                                    })
-                                    .addOnFailureListener(e -> Utils.showToast(this, findViewById(R.id.fragment_container), "Uploading Failure"));
 
                         } else {
                             Utils.showToast(this, findViewById(R.id.fragment_container), "Upload Failed");
@@ -387,22 +391,16 @@ public class UserProfilePreferences extends BaseActivity implements View.OnClick
         String emailId = mEdtEmailId.getText().toString().trim();
         final String contactNumber = mEdtContactNumber.getText().toString().trim();
         String location = mEdtLocation.getText().toString().trim();
-
         final Session session = AppPreferences.getSession();
-        UserModel userModel = new UserModel(displayname, firstName, middleName, LastName, contactNumber, location, preferences, "");
+        UserModel userModel = new UserModel(displayname, firstName, middleName, LastName, contactNumber, location, preferences, profileImage);
         session.setUserModel(userModel);
 
 
         mDatabase.child("Users").child(session.getUserId()).setValue(session)
                 .addOnSuccessListener(aVoid -> {
-                    spinnerView.setVisibility(View.GONE);
                     AppPreferences.setSession(session);
-                    if (isFirstTime)
-                        AppPreferences.setSelectedHomeScreen(SELECTED_HOME_SCREEN, 2);
-
-                    Intent intent = new Intent(UserProfilePreferences.this, MainActivity.class);
-                    intent.putExtra(Keys.MOBILE_NUMBER, contactNumber);
-                    startActivity(intent);
+                    spinnerView.setVisibility(View.GONE);
+                    startActivity(new Intent(UserProfilePreferencesActivity.this, MainActivity.class));
                     finish();
                 })
                 .addOnFailureListener(e ->

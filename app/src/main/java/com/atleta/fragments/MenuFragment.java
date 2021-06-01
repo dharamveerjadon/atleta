@@ -78,8 +78,8 @@ public class MenuFragment extends BaseFragment {
 
         if (session != null && session.getUserModel() != null ) {
 
-           /* Glide.with(AtletaApplication.sharedInstance())
-                    .load(session.getUserModel().getProfileImage().url)
+            Glide.with(AtletaApplication.sharedInstance())
+                    .load(session.getUserModel().getProfile_image_url())
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean
@@ -95,7 +95,7 @@ public class MenuFragment extends BaseFragment {
                     })
                     .placeholder(R.drawable.ic_avatar)
                     .dontAnimate()
-                    .into(mImvMember);*/
+                    .into(mImvMember);
         }
 
     }
@@ -109,8 +109,8 @@ public class MenuFragment extends BaseFragment {
         final ListView listView = (ListView) view.findViewById(R.id.listView);
 
         final List<MenuItem> items = new ArrayList<>();
-        items.add(new MenuItem(R.string.string_timeline, R.drawable.ic_timeline_grey));
-        items.add(new MenuItem(R.string.string_my_job, R.drawable.ic_job_grey));
+        items.add(new MenuItem(R.string.string_home, R.drawable.ic_home_black));
+        items.add(new MenuItem(R.string.string_message, R.drawable.ic_job_grey));
         items.add(new MenuItem(R.string.string_logout, R.drawable.ic_logout));
 
         final MenuAdapter menuAdapter = new MenuAdapter(getActivity(), items);

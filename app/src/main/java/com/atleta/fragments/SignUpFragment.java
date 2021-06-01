@@ -16,12 +16,11 @@ import android.widget.EditText;
 
 import com.google.firebase.database.DatabaseReference;
 import com.atleta.R;
-import com.atleta.activities.UserProfilePreferences;
+import com.atleta.activities.UserProfilePreferencesActivity;
 import com.atleta.customview.SpinnerView;
 import com.atleta.models.Session;
 import com.atleta.models.UserModel;
 import com.atleta.utils.AppPreferences;
-import com.atleta.utils.Keys;
 import com.atleta.utils.AtletaApplication;
 import com.atleta.utils.Utils;
 
@@ -87,12 +86,14 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
                                 .addOnSuccessListener(aVoid -> {
                                     AppPreferences.setSession(session);
                                         spinnerView.setVisibility(View.GONE);
-                                        Intent intent = new Intent(getActivity(), UserProfilePreferences.class);
+                                        Intent intent = new Intent(getActivity(), UserProfilePreferencesActivity.class);
                                         startActivity(intent);
                                         getActivity().finish();
 
                                 })
-                                .addOnFailureListener(e -> spinnerView.setVisibility(View.GONE));
+                                .addOnFailureListener(e ->
+                                        spinnerView.setVisibility(View.GONE)
+                                );
                     }
 
                 }
@@ -101,17 +102,6 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
-    /**
-     * Add the developer fragment
-     */
-    private void addMyDeveloperFragment() {
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        DeveloperEntryFragment fragment = DeveloperEntryFragment.newInstance(getString(R.string.string_profile), null);
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
-    }
 
     private boolean isValidation() {
 

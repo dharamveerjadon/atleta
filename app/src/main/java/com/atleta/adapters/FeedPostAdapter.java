@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class WatingAdapter extends BaseAdapter {
+public class FeedPostAdapter extends BaseAdapter {
 
     //corporate list view
     private static final int TYPE_ITEM = 0;
@@ -36,7 +36,7 @@ public class WatingAdapter extends BaseAdapter {
     private List<MyJobsModel> mItems;
     private long mItemCountOnServer;
 
-    public WatingAdapter(Context context, WatingAdapter.OnItemClickListener onItemClickListener) {
+    public FeedPostAdapter(Context context, FeedPostAdapter.OnItemClickListener onItemClickListener) {
         this.context = context;
         mOnItemClickListener = onItemClickListener;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -138,7 +138,7 @@ public class WatingAdapter extends BaseAdapter {
                 return v;
 
             default:
-                return mInflater.inflate(R.layout.fragment_job_list_item_empty, parent, false);
+                return mInflater.inflate(R.layout.fragment_blank, parent, false);
 
         }
     }
@@ -149,7 +149,7 @@ public class WatingAdapter extends BaseAdapter {
     private static class ItemViewHolder implements View.OnClickListener {
 
         //view on click listener need to forward click events
-        private final WatingAdapter.OnItemClickListener mOnItemClickListener;
+        private final FeedPostAdapter.OnItemClickListener mOnItemClickListener;
         private final TextView mTitle;
         private final TextView mTxtDescription;
         private final TextView mTxtDate;
@@ -162,7 +162,7 @@ public class WatingAdapter extends BaseAdapter {
         // current bind to view holder
         private MyJobsModel mCurrentItem;
 
-        ItemViewHolder(@NonNull View view, final WatingAdapter.OnItemClickListener listener) {
+        ItemViewHolder(@NonNull View view, final FeedPostAdapter.OnItemClickListener listener) {
             mOnItemClickListener = listener;
             view.setOnClickListener(this);
             mTitle = view.findViewById(R.id.txt_title);

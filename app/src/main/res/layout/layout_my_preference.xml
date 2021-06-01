@@ -117,7 +117,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_badminton"
+            android:id="@+id/cardview_fitness"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardElevation="4dp"
@@ -129,18 +129,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <ImageView
-                    android:id="@+id/img_badminton"
+                    android:id="@+id/img_fitness"
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_cricket_black"/>
+                    android:src="@drawable/ic_fitness_black"/>
 
                 <com.atleta.customview.AtletaTextView
-                    android:id="@+id/txt_badminton"
+                    android:id="@+id/txt_fitness"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Badminton"
+                    android:text="Fitness"
                     android:padding="8dp"
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"

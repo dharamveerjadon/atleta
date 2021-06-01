@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.WebViewActivity"/>
-        <activity android:name=".activities.UserProfilePreferences" />
+        <activity android:name=".activities.UserProfilePreferencesActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
@@ -43,10 +43,6 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
-
-        <service
-            android:name="com.atleta.services.ClearServices"
-            android:stopWithTask="false" />
 
     </application>
 

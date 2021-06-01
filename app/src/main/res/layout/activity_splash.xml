@@ -6,30 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".activities.SplashActivity">
 
-    <LinearLayout
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_logo" />
+
+    <com.atleta.customview.AtletaTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/skyhawk_splash_logo" />
-
-        <com.atleta.customview.AtletaTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="16sp"
-            android:gravity="center"
-            app:appFont="Poppins-Light"
-            android:fontFamily="sans-serif-light"
-            android:layout_marginTop="@dimen/margin_default"
-            android:text="SPORTS. COMMUNITY. NETWORK."
-            android:padding="@dimen/padding_default_double"/>
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_default"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:padding="@dimen/padding_default_double"
+        android:text="SPORTS. COMMUNITY. NETWORK."
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:layout_alignParentBottom="true"
+        app:appFont="Poppins-Light" />
 
 </RelativeLayout>

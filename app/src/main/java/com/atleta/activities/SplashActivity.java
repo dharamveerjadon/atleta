@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.atleta.R;
 import com.atleta.models.Session;
-import com.atleta.services.ClearServices;
 import com.atleta.utils.AppPreferences;
 import com.atleta.utils.Keys;
 import com.atleta.utils.Utils;
@@ -22,8 +21,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        startService(new Intent(getBaseContext(), ClearServices.class));
 
         final Intent intent = getIntent();
         if (Utils.isAppUrl(intent.getDataString()) || intent.hasExtra(Keys.NOTIFICATION)) {
@@ -54,9 +51,8 @@ public class SplashActivity extends AppCompatActivity {
                     //if app is open using reset password link from email and user is already login then show the message
                     Utils.showToast(this, null, getString(R.string.already_logged_in));
                 }
-
             }else {
-                newIntent.setClass(this, UserProfilePreferences.class);
+                newIntent.setClass(this, UserProfilePreferencesActivity.class);
             }
         } else {
             //open the login activity
@@ -64,7 +60,6 @@ public class SplashActivity extends AppCompatActivity {
             newIntent.setData(intent.getData());
             newIntent.setClass(this, SignUpActivity.class);
         }
-
         startActivity(newIntent);
         finish();
     }
