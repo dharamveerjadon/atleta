@@ -150,13 +150,25 @@
                     style="@style/AppTheme.TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/don_t_have_an_account"
+                    android:text="Forget password"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:padding="4dp"
                     app:appFont="Poppins-Regular"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
+
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/don_t_have_an_account"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        app:appFont="Poppins-Regular"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
 
                 <com.atleta.customview.AtletaButton
                     style="@style/AppTheme.Button"
@@ -171,7 +183,22 @@
                     android:textAllCaps="false"
                     android:elevation="4dp" />
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
 
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_facebook"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_google"/>
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

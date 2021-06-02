@@ -84,8 +84,6 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
 
         Session session = AppPreferences.getSession();
 
-        mobileNumber = TextUtils.isEmpty(session.getUserModel().getMobileNumber()) ? mobileNumber : session.getUserModel().getMobileNumber();
-
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         mDrawerToggle = new ActionBarDrawerToggle(
@@ -149,7 +147,7 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
         new Handler().postDelayed(() -> onHandleNotification(getIntent()), 1000);
 
 
-        getdata();
+        getdata(session);
 
         lnrEditIconProfile.setOnClickListener(v -> {
             Session editSession = AppPreferences.getSession();
@@ -171,9 +169,9 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
         onHandleNotification(intent);
     }
 
-    private void getdata() {
+    private void getdata(Session session) {
 
-        DatabaseReference databaseReference = AtletaApplication.sharedDatabaseInstance().child("Users").child(mobileNumber);
+        DatabaseReference databaseReference = AtletaApplication.sharedDatabaseInstance().child("Users").child(session.getUserId());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

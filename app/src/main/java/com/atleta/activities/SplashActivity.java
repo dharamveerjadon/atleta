@@ -43,17 +43,12 @@ public class SplashActivity extends AppCompatActivity {
         newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (AppPreferences.isLoggedIn()) {
             // user is already loggedIn open the MainActivity
-
-            if(session.getUserModel() != null && !TextUtils.isEmpty(session.getUserModel().getMobileNumber())) {
                 newIntent.setClass(this, MainActivity.class);
                 newIntent.putExtra(Keys.NOTIFICATION, intent.getSerializableExtra(Keys.NOTIFICATION));
                 if (Utils.isAppUrl(intent.getDataString())) {
                     //if app is open using reset password link from email and user is already login then show the message
                     Utils.showToast(this, null, getString(R.string.already_logged_in));
                 }
-            }else {
-                newIntent.setClass(this, UserProfilePreferencesActivity.class);
-            }
         } else {
             //open the login activity
             newIntent.putExtras(intent);

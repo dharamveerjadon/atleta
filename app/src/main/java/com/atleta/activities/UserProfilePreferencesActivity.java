@@ -41,8 +41,6 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 public class UserProfilePreferencesActivity extends BaseActivity implements View.OnClickListener {
-    private static final int DOCUMENT_CODE = 07;
-    private static DatabaseReference mDatabase;
     private EditText mEdtDisplayName, mEdtFirstName, mEdtMiddleName, mEdtLastName, mEdtEmailId, mEdtContactNumber,
             mEdtLocation;
     private Button mBtnSubmit;
@@ -50,7 +48,6 @@ public class UserProfilePreferencesActivity extends BaseActivity implements View
     private Uri imageuri;
     private ProgressDialog dialog;
     private SpinnerView spinnerView;
-    private boolean isFirstTime;
     private String profileImage;
     private ProgressBar mProgressBar;
     private final ArrayList<String> preferences = new ArrayList<>();
@@ -63,12 +60,6 @@ public class UserProfilePreferencesActivity extends BaseActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userprofile_preference);
 
-        if (getIntent() != null) {
-            isFirstTime = getIntent().getBooleanExtra("isFirst", false);
-        }
-
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
         findViewId();
         registerListener();
         getdata();
@@ -119,7 +110,7 @@ public class UserProfilePreferencesActivity extends BaseActivity implements View
 
         Session session = AppPreferences.getSession();
         if (session != null) {
-            mDatabase.child("Users").child(session.getUserId()).addValueEventListener(new ValueEventListener() {
+            AtletaApplication.sharedDatabaseInstance().child("Users").child(session.getUserId()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -396,7 +387,7 @@ public class UserProfilePreferencesActivity extends BaseActivity implements View
         session.setUserModel(userModel);
 
 
-        mDatabase.child("Users").child(session.getUserId()).setValue(session)
+        AtletaApplication.sharedDatabaseInstance().child("Users").child(session.getUserId()).setValue(session)
                 .addOnSuccessListener(aVoid -> {
                     AppPreferences.setSession(session);
                     spinnerView.setVisibility(View.GONE);

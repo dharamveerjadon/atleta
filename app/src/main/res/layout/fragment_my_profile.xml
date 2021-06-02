@@ -41,9 +41,9 @@
                     android:id="@+id/progress_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:visibility="invisible"
-                    android:layout_centerHorizontal="true"/>
+                    android:visibility="invisible" />
 
             </RelativeLayout>
 
@@ -62,117 +62,72 @@
                 tools:text="David louis" />
 
             <com.atleta.customview.AtletaTextView
-                android:id="@+id/txt_location"
                 style="@style/AppTheme.TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:drawableLeft="@drawable/ic_location"
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 app:appFont="Poppins-Regular"
-                tools:text="Bangalore, India" />
-
-            <com.atleta.customview.AtletaTextView
-                android:id="@+id/txt_mobile_number"
-                style="@style/AppTheme.TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:drawableLeft="@drawable/ic_phone"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                app:appFont="Poppins-Regular"
-                tools:text="Bangalore, India" />
-
-
-            <com.atleta.customview.AtletaTextView
-                android:id="@+id/txt_email"
-                style="@style/AppTheme.TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawableLeft="@drawable/ic_email"
-                android:gravity="center"
-                android:padding="4dp"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                app:appFont="Poppins-Regular"
-                tools:text="dharamveerjadon@gmail.com" />
+                android:text="david_louis" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_default">
 
-                <LinearLayout
+                <com.atleta.customview.AtletaTextView
+                    android:id="@+id/txt_edit"
+                    style="@style/AppTheme.TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <com.atleta.customview.AtletaTextView
-                        android:id="@+id/txt_price_per_hour"
-                        style="@style/AppTheme.TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:textColor="@android:color/black"
-                        android:textFontWeight="600"
-                        android:textSize="18sp"
-                        app:appFont="Poppins-SemiBold"
-                        tools:text="$200" />
-
-
-                    <com.atleta.customview.AtletaTextView
-                        style="@style/AppTheme.TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:text="Price Per Hour"
-                        android:textColor="@android:color/black"
-                        android:textSize="10sp"
-                        app:appFont="Poppins-Regular" />
-
-                </LinearLayout>
+                    android:drawableLeft="@drawable/ic_edit_orange"
+                    android:gravity="center"
+                    android:drawablePadding="8dp"
+                    android:text="Edit"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    app:appFont="Poppins-Regular" />
 
                 <View
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/colorAccent" />
+                    android:layout_margin="8dp"
+                    android:background="@color/colorBlack" />
+
+                <com.atleta.customview.AtletaTextView
+                    android:id="@+id/txt_share"
+                    style="@style/AppTheme.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/ic_share_orange"
+                    android:gravity="center"
+                    android:text="Share"
+                    android:drawablePadding="8dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    app:appFont="Poppins-Regular" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_default">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <com.atleta.customview.AtletaTextView
-                        android:id="@+id/txt_expected_salary"
-                        style="@style/AppTheme.TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:textColor="@android:color/black"
-                        android:textFontWeight="600"
-                        android:textSize="18sp"
-                        app:appFont="Poppins-SemiBold"
-                        tools:text="$200" />
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <com.atleta.customview.AtletaTextView
                         style="@style/AppTheme.TextView"
@@ -180,204 +135,203 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:padding="4dp"
-                        android:text="Expected Salary"
+                        android:text="Followers"
                         android:textColor="@android:color/black"
-                        android:textSize="10sp"
+                        android:textSize="14sp"
                         app:appFont="Poppins-Regular" />
 
+                    <com.atleta.customview.AtletaTextView
+                        android:id="@+id/txt_followers"
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="28k"
+                        android:layout_marginLeft="4dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp"
+                        app:appFont="Poppins-Regular" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/colorAccent" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                <com.atleta.customview.AtletaTextView
+                    style="@style/AppTheme.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Post"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    app:appFont="Poppins-Regular" />
 
                     <com.atleta.customview.AtletaTextView
-                        android:id="@+id/txt_year_of_experience"
+                        android:id="@+id/txt_post"
                         style="@style/AppTheme.TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:padding="4dp"
-                        android:textColor="@android:color/black"
-                        android:textFontWeight="600"
+                        android:text="200"
+                        android:layout_marginLeft="4dp"
+                        android:textColor="@color/colorAccent"
                         android:textSize="18sp"
-                        app:appFont="Poppins-SemiBold"
-                        tools:text="8" />
-
-
-                    <com.atleta.customview.AtletaTextView
-                        style="@style/AppTheme.TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:text="Year Of Experience"
-                        android:textColor="@android:color/black"
-                        android:textSize="10sp"
                         app:appFont="Poppins-Regular" />
-
                 </LinearLayout>
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical">
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Following"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        app:appFont="Poppins-Regular" />
 
                 <com.atleta.customview.AtletaTextView
+                    android:id="@+id/txt_following"
                     style="@style/AppTheme.TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:padding="4dp"
-                    android:text="Skype ID"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    app:appFont="Poppins-Regular" />
-
-
-                <com.atleta.customview.AtletaTextView
-                    android:id="@+id/txt_skype_id"
-                    style="@style/AppTheme.TextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:textColor="@android:color/black"
-                    android:textFontWeight="600"
+                    android:text="20"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp"
-                    app:appFont="Poppins-SemiBold"
-                    tools:text="Year Of Experience" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="16dp"
-                android:background="@color/colorAccent" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:orientation="vertical">
-
-                <com.atleta.customview.AtletaTextView
-                    style="@style/AppTheme.TextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:text="Linkedin ID"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
                     app:appFont="Poppins-Regular" />
-
-
-                <com.atleta.customview.AtletaTextView
-                    android:id="@+id/txt_linkedIn"
-                    style="@style/AppTheme.TextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:textColor="@android:color/black"
-                    android:textFontWeight="600"
-                    android:textSize="18sp"
-                    app:appFont="Poppins-SemiBold"
-                    tools:text="Year Of Experience" />
-
+                </LinearLayout>
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="16dp"
-                android:background="@color/colorAccent" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:padding="16dp"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <com.atleta.customview.AtletaTextView
+                    style="@style/AppTheme.TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".8"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:text="Fandom points"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textFontWeight="700"
+                    app:appFont="Poppins-Bold" />
 
-                    <com.atleta.customview.AtletaTextView
-                        style="@style/AppTheme.TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Skills"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp"
-                        app:appFont="Poppins-Regular" />
-
-                    <LinearLayout
-                        android:id="@+id/lnr_skill"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" />
-                </LinearLayout>
-
-                <LinearLayout
+                <com.atleta.customview.AtletaTextView
+                    android:id="@+id/txt_points"
+                    style="@style/AppTheme.TextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".2"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:id="@+id/img_resume"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:padding="4dp"
-                        android:src="@drawable/icon_document"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-                    <com.atleta.customview.AtletaTextView
-                        style="@style/AppTheme.TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp"
-                        app:appFont="Poppins-Regular"
-                        android:text="Resume" />
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:drawableTint="@color/colorAccent"
+                    android:drawableLeft="@drawable/ic_soccor_black"
+                    android:text="200000"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    app:appFont="Poppins-Regular" />
             </LinearLayout>
 
-        </LinearLayout>
+            <com.atleta.customview.AtletaTextView
+                style="@style/AppTheme.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Foodie, traveller, Fitness, Enthuastic, youtuber"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:appFont="Poppins-Regular" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_facebook"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_google"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_twitter"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_linkedin"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/grey" />
+
+            <FrameLayout
+                android:id="@+id/fl_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:elevation="1dp">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    style="@style/AppTheme.TabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:minHeight="?attr/actionBarSize"
+                    app:tabPaddingStart="@dimen/tab_padding"
+                    app:tabPaddingEnd="@dimen/tab_padding"
+                    app:tabMode="fixed"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+            </FrameLayout>
+
+            <!-- View pager to swipe views -->
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:fillViewport="true"/>
+    </LinearLayout>
     </ScrollView>
+
     <com.atleta.customview.SpinnerView
         android:id="@+id/spinnerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        tools:visibility="visible" />
+        tools:visibility="invisible" />
 </RelativeLayout>
