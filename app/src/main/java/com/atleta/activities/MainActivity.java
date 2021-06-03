@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
         mTabBar = findViewById(R.id.tab_bar);
         List<MenuItem> items = new ArrayList<>();
         items.add(new MenuItem(R.string.string_home, R.drawable.ic_home_black));
-        items.add(new MenuItem(R.string.string_message, R.drawable.ic_profile_grey));
+        items.add(new MenuItem(R.string.string_message, R.drawable.ic_message_black));
         items.add(new MenuItem(R.string.string_profile, R.drawable.ic_profile_grey));
         mTabBar.setMenuItems(items);
 

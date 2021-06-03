@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.atleta.activities.MainActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.atleta.R;
 import com.atleta.activities.UserProfilePreferencesActivity;
@@ -86,7 +87,7 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
                                 .addOnSuccessListener(aVoid -> {
                                     AppPreferences.setSession(session);
                                         spinnerView.setVisibility(View.GONE);
-                                        Intent intent = new Intent(getActivity(), UserProfilePreferencesActivity.class);
+                                        Intent intent = new Intent(getActivity(), MainActivity.class);
                                         startActivity(intent);
                                         getActivity().finish();
 

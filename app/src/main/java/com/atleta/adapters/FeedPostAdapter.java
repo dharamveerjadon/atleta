@@ -5,15 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.viewpager.widget.ViewPager;
 
 import com.atleta.R;
 import com.atleta.customview.Tag;
 import com.atleta.customview.TagView;
 import com.atleta.models.MyJobsModel;
 import com.atleta.utils.Constants;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -128,7 +131,7 @@ public class FeedPostAdapter extends BaseAdapter {
                 final MyJobsModel item = mItems.get(position);
                 ItemViewHolder itemViewHolder;
                 if (v == null) {
-                    v = mInflater.inflate(R.layout.fragment_waiting_info_list_item, parent, false);
+                    v = mInflater.inflate(R.layout.item_feed_atleta, parent, false);
                     itemViewHolder = new ItemViewHolder(v, mOnItemClickListener);
                     v.setTag(itemViewHolder);
                 } else {
@@ -150,30 +153,30 @@ public class FeedPostAdapter extends BaseAdapter {
 
         //view on click listener need to forward click events
         private final FeedPostAdapter.OnItemClickListener mOnItemClickListener;
-        private final TextView mTitle;
-        private final TextView mTxtDescription;
-        private final TextView mTxtDate;
-        private final TextView mTxtJobType;
-        private final TagView tagGroup;
-        private final TextView mTxtYearOfExperience;
-        private final TextView mBudget;
-        private final TextView mTxtStatus;
-        private final View viewBar;
+        private ImageView mProfileImage, mThreeDot;
+        private final TextView mHeaderTitle, mHeaderSubTitle;
+        private final ViewPager viewPager;
+        private final DotsIndicator dotsIndicator;
+        private final ImageView imgHeart, imgComment, imgForward, imgCollection;
+        private final TextView txtLikes, txtCommentView;
         // current bind to view holder
         private MyJobsModel mCurrentItem;
 
         ItemViewHolder(@NonNull View view, final FeedPostAdapter.OnItemClickListener listener) {
             mOnItemClickListener = listener;
             view.setOnClickListener(this);
-            mTitle = view.findViewById(R.id.txt_title);
-            mTxtDescription = view.findViewById(R.id.txt_description);
-            mTxtDate = view.findViewById(R.id.txt_date);
-            mTxtJobType = view.findViewById(R.id.txt_job_type);
-            tagGroup = view.findViewById(R.id.tag_group);
-            mTxtYearOfExperience = view.findViewById(R.id.txt_year_of_experience);
-            mBudget = view.findViewById(R.id.txt_tentative_budget);
-            mTxtStatus = view.findViewById(R.id.txt_status);
-            viewBar = view.findViewById(R.id.view_bar);
+            mProfileImage = view.findViewById(R.id.img_profile);
+            mThreeDot = view.findViewById(R.id.three_dot);
+            mHeaderTitle = view.findViewById(R.id.header_title);
+            mHeaderSubTitle = view.findViewById(R.id.header_sub_title);
+            viewPager = view.findViewById(R.id.view_pager);
+            dotsIndicator = view.findViewById(R.id.dots_indicator);
+            imgHeart = view.findViewById(R.id.icon_heart);
+            imgComment = view.findViewById(R.id.icon_comment);
+            imgForward = view.findViewById(R.id.icon_post_Share);
+            imgCollection = view.findViewById(R.id.icon_save_collection);
+            txtLikes = view.findViewById(R.id.txt_likes);
+            txtCommentView = view.findViewById(R.id.txt_view_comments);
         }
 
         @Override
@@ -191,15 +194,10 @@ public class FeedPostAdapter extends BaseAdapter {
         void bind(Context context, final MyJobsModel item) {
             mCurrentItem = item;
 
-            mTitle.setText(item.getTitle());
-            mTxtDescription.setText(item.getDescription());
-            mTxtDate.setText(setDateFormat(item.getDate()));
-            mTxtJobType.setText(item.getJobType());
-            setTags(context, item.getSkills());
-            mTxtYearOfExperience.setText(item.getYearOfExperience() + " Yrs experience");
-            mBudget.setText("₹ " +item.getBudgets());
-            mTxtStatus.setText("In Progress");
-            viewBar.setBackgroundColor(context.getResources().getColor(R.color.colorBlack));
+            mHeaderTitle.setText(item.getTitle());
+            mHeaderSubTitle.setText(item.getDescription());
+            txtLikes.setText(setDateFormat(item.getDate()));
+            txtCommentView.setText(item.getYearOfExperience() + " Yrs experience");
 
         }
 
@@ -207,21 +205,6 @@ public class FeedPostAdapter extends BaseAdapter {
             DateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_EDDMMMYYYY);
             Date date = new Date(value);
             return dateFormat.format(date);
-        }
-
-        private void setTags(Context context, String skills) {
-            List<Tag> tagList = new ArrayList<>();
-
-            String[] strSkills = skills.split(",");
-            for (String value : strSkills) {
-                Tag tag;
-                tag = new Tag(context, value);
-                tag.radius = 10f;
-                tag.layoutColor = tag.layoutBorderColor;
-                tag.isDeletable = false;
-                tagList.add(tag);
-            }
-            tagGroup.addTags(tagList);
         }
     }
 }
