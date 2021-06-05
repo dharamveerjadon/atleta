@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhiteWithTransparency"
+    tools:context=".fragments.AddComunityDetailsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_default">
+
+            <com.atleta.customview.AtletaTextView
+                style="@style/AppTheme.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Community Information"
+                android:textColor="@android:color/black"
+                android:textFontWeight="700"
+                android:textSize="18sp"
+                app:appFont="Poppins-Bold" />
+
+            <com.atleta.customview.AtletaTextView
+                style="@style/AppTheme.TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_double"
+                android:padding="4sp"
+                android:text="Community name"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:appFont="Poppins-Regular" />
+
+            <com.atleta.customview.AtletaEditText
+                android:id="@+id/edt_community_name"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_edit_text"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="@android:color/black"
+                app:appFont="Poppins-Regular" />
+
+            <Spinner
+                android:id="@+id/spinner_topic"
+                style="@style/AppTheme.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_double" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_double"
+                android:orientation="horizontal">
+
+                <com.atleta.customview.AtletaTextView
+                    style="@style/AppTheme.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4sp"
+                    android:text="Visibility"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    app:appFont="Poppins-Regular" />
+
+                <RadioGroup
+                    android:id="@+id/radio_visibility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_public"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:checked="true"
+                        android:text="Public" />
+
+                    <RadioButton
+                        android:id="@+id/radio_invite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_default"
+                        android:text="Invite only" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <com.atleta.customview.AtletaTextView
+                android:id="@+id/radio_txt_update"
+                style="@style/AppTheme.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"
+                android:drawableLeft="@drawable/circle_cross"
+                android:padding="4sp"
+                android:text="Public community are visible and are broadcasted to all users"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                app:appFont="Poppins-Regular" />
+
+            <com.atleta.customview.AtletaTextView
+                style="@style/AppTheme.TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_double"
+                android:padding="4sp"
+                android:text="About your community"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:appFont="Poppins-Regular" />
+
+            <com.atleta.customview.AtletaEditText
+                android:id="@+id/edt_about_coummunity"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_edit_text"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:minLines="5"
+                android:padding="12dp"
+                android:scrollbars="horizontal"
+                android:textColor="@android:color/black"
+                app:appFont="Poppins-Regular" />
+
+            <com.atleta.customview.AtletaTextView
+                style="@style/AppTheme.TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_double"
+                android:padding="4sp"
+                android:text="Who can post in your community"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:appFont="Poppins-Regular" />
+
+            <Spinner
+                android:id="@+id/spinner_scope"
+                style="@style/AppTheme.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_double" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="4dp"
+                android:layout_marginTop="@dimen/margin_default_double"
+                app:cardBackgroundColor="@color/colorWhite">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_default_double"
+                        android:padding="4sp"
+                        android:text="Add related profile photo as they are the quickest way to get attention of your target audience"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:appFont="Poppins-Regular" />
+
+                    <RelativeLayout
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="24dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/profile_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_avatar" />
+
+                        <ImageView
+                            android:id="@+id/img_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_add"
+                            android:visibility="visible" />
+
+                        <ProgressBar
+                            android:id="@+id/progress_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:visibility="invisible" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="4dp"
+                android:layout_marginTop="@dimen/margin_default_double"
+                app:cardBackgroundColor="@color/colorWhite">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@color/colorWhite"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/image_placeholder" />
+
+                    <ImageView
+                        android:id="@+id/img_update_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|bottom"
+                        android:padding="@dimen/padding_default"
+                        android:src="@drawable/page_home_uploadcover"
+                        android:visibility="visible" />
+
+                    <ProgressBar
+                        android:id="@+id/pb_header_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
+
+            <com.atleta.customview.AtletaButton
+                android:id="@+id/btn_next"
+                style="@style/AppTheme.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="24dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/border_button_orange"
+                android:elevation="4dp"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                app:appFont="Poppins-Regular" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.atleta.customview.SpinnerView
+        android:id="@+id/spinnerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="gone" />
+</RelativeLayout>

@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.text.Editable;
@@ -25,7 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.atleta.R;
-import com.atleta.activities.MainActivity;
+import com.atleta.activities.HomeActivity;
 import com.atleta.activities.SignUpActivity;
 import com.atleta.customview.SpinnerView;
 import com.atleta.models.Session;
@@ -137,7 +135,7 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
                         new Handler().postDelayed(() -> {
                             spinnerView.setVisibility(View.GONE);
                             AppPreferences.setSession(session);
-                            startActivity(new Intent(getActivity(), MainActivity.class));
+                            startActivity(new Intent(getActivity(), HomeActivity.class));
                             activity.finish();
                         },3000);
                     }else {

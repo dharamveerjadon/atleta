@@ -3,7 +3,6 @@ package com.atleta.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
         newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (AppPreferences.isLoggedIn()) {
             // user is already loggedIn open the MainActivity
-                newIntent.setClass(this, MainActivity.class);
+                newIntent.setClass(this, HomeActivity.class);
                 newIntent.putExtra(Keys.NOTIFICATION, intent.getSerializableExtra(Keys.NOTIFICATION));
                 if (Utils.isAppUrl(intent.getDataString())) {
                     //if app is open using reset password link from email and user is already login then show the message

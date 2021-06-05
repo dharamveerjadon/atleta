@@ -13,7 +13,8 @@ public class Constants {
     public static final String DECLINE = "decline";
     public static final String SAVED_FOR_LATER = "Saved for later";
     public static final String SHOW_ALL = "all";
-
+    public static final String FILE_TYPE_IMAGE = "Image";
+    public static final int GALLERY_REQUEST = 8; // For Gallery
     //---------------------Date Format-------------------------------------------------------------------------------------------------------------------
     public static final String DATE_FORMAT_EDDMMMYYYY = "EE, dd MMMM yyyy";
     public static final String DATE_FORMAT_yyyyMMDD = "yyyy-MM-dd'T'hh:mm:ss";

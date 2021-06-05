@@ -29,4 +29,9 @@
     <dimen name="general_margin">40dp</dimen>
     <dimen name="tab_text_size">13sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <integer name="image_column_count">3</integer>
+    <integer name="doc_column_count">4</integer>
+    <dimen name="dgv_overlap_if_switch_straight_line">16dp</dimen>
+
 </resources>

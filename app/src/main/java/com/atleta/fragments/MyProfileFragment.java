@@ -4,26 +4,28 @@ package com.atleta.fragments;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+/*import com.bumptech.glide.load.resource.drawable.GlideDrawable;*/
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.Continuation;
@@ -35,12 +37,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.atleta.R;
-import com.atleta.activities.MainActivity;
-import com.atleta.activities.WebViewActivity;
+import com.atleta.activities.HomeActivity;
 import com.atleta.customview.SpinnerView;
 import com.atleta.models.Session;
-import com.atleta.models.Upload;
-import com.atleta.models.UserModel;
 import com.atleta.utils.AppPreferences;
 import com.atleta.utils.Keys;
 import com.atleta.utils.AtletaApplication;
@@ -58,7 +57,7 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
     private ImageView userImageEditIcon, profileImageView;
     private Uri imageuri;
     private String profileImage;
-    private MainActivity activity;
+    private HomeActivity activity;
     private ProgressBar mProgressBar;
     private SpinnerView spinnerView;
     private TextView  mTxtName;
@@ -75,7 +74,7 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (MainActivity) context;
+        activity = (HomeActivity) context;
     }
 
     @Override
@@ -198,18 +197,16 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
                             activity.sendBroadcast(new Intent(Keys.BROADCAST_PROFILE_IMAGE));
                             Glide.with(AtletaApplication.sharedInstance())
                                     .load(uri.toString())
-                                    .listener(new RequestListener<String, GlideDrawable>() {
+                                    .listener(new RequestListener<Drawable>() {
                                         @Override
-                                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean
-                                                isFirstResource) {
+                                        public boolean onLoadFailed(@Nullable @org.jetbrains.annotations.Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                                             mProgressBar.setVisibility(View.INVISIBLE);
                                             spinnerView.setVisibility(View.GONE);
                                             return false;
                                         }
 
                                         @Override
-                                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable>
-                                                target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                             mProgressBar.setVisibility(View.INVISIBLE);
                                             spinnerView.setVisibility(View.GONE);
                                             return false;

@@ -4,9 +4,6 @@ package com.atleta.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.atleta.activities.MainActivity;
+import com.atleta.activities.HomeActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.atleta.R;
-import com.atleta.activities.UserProfilePreferencesActivity;
 import com.atleta.customview.SpinnerView;
 import com.atleta.models.Session;
 import com.atleta.models.UserModel;
@@ -87,7 +83,7 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
                                 .addOnSuccessListener(aVoid -> {
                                     AppPreferences.setSession(session);
                                         spinnerView.setVisibility(View.GONE);
-                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        Intent intent = new Intent(getActivity(), HomeActivity.class);
                                         startActivity(intent);
                                         getActivity().finish();
 

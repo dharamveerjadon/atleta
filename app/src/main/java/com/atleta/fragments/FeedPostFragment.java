@@ -14,13 +14,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.atleta.R;
-import com.atleta.activities.MainActivity;
+import com.atleta.activities.HomeActivity;
 import com.atleta.adapters.FeedPostAdapter;
 import com.atleta.customview.SpinnerView;
-import com.atleta.models.ApplyJob;
 import com.atleta.models.MyJobsModel;
-import com.atleta.models.Session;
-import com.atleta.utils.AppPreferences;
 import com.atleta.utils.AtletaApplication;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,7 +39,7 @@ public class FeedPostFragment extends BaseFragment implements FeedPostAdapter.On
     private FeedPostAdapter mAdapter;
     private ListView listRequirement;
     private ImageView noRecordFound;
-    private MainActivity activity;
+    private HomeActivity activity;
     private SpinnerView spinnerView;
 
 
@@ -57,7 +54,7 @@ public class FeedPostFragment extends BaseFragment implements FeedPostAdapter.On
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (MainActivity)context;
+        activity = (HomeActivity)context;
     }
 
     @Override

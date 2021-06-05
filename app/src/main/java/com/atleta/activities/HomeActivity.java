@@ -27,7 +27,7 @@ import com.atleta.R;
 import com.atleta.customview.TabBar;
 import com.atleta.fragments.MessageFragment;
 import com.atleta.fragments.MyProfileFragment;
-import com.atleta.fragments.FeedsFragment;
+import com.atleta.fragments.HomeFragment;
 import com.atleta.interfaces.MenuItemInteraction;
 import com.atleta.models.MenuItem;
 import com.atleta.models.MyJobsModel;
@@ -48,7 +48,7 @@ import java.util.List;
 
 import static com.atleta.utils.AppPreferences.SELECTED_HOME_SCREEN;
 
-public class MainActivity extends BaseActivity implements MenuItemInteraction {
+public class HomeActivity extends BaseActivity implements MenuItemInteraction {
     //toolbar
     private Toolbar mToolbar;
     private TextView toolbarTitle;
@@ -120,23 +120,26 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
             public void onMenuClick(MenuItem menuItem) {
                 switch (menuItem.textResId) {
                     case R.string.string_home:
-                        addTimeLineFragment();
+                        addHomeFragment();
                         break;
+
                     case R.string.string_message:
                         addMessageFragment();
                         break;
+
+
                     case R.string.string_profile:
                         addMyProfileFragment();
                         break;
                     default:
                         mTabBar.setSelectedIndex(0, false);
-                        addTimeLineFragment();
+                        addHomeFragment();
                 }
             }
 
             @Override
             public void onPopClick() {
-                MainActivity.this.onPopClick();
+                HomeActivity.this.onPopClick();
             }
         });
 
@@ -151,7 +154,7 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
 
         lnrEditIconProfile.setOnClickListener(v -> {
             Session editSession = AppPreferences.getSession();
-            Intent intent = new Intent(MainActivity.this, UserProfilePreferencesActivity.class);
+            Intent intent = new Intent(HomeActivity.this, UserProfilePreferencesActivity.class);
             intent.putExtra(Keys.MOBILE_NUMBER, editSession.getUserModel().getMobileNumber());
             startActivity(intent);
         });
@@ -183,7 +186,7 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
             public void onCancelled(@NonNull DatabaseError error) {
                 // calling on cancelled method when we receive
                 // any error or we are not able to get the data.
-                Toast.makeText(MainActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -332,11 +335,11 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
         switch (item.textResId) {
             case R.string.string_home:
                 mTabBar.setSelectedIndex(0, false);
-                addTimeLineFragment();
+                addHomeFragment();
                 break;
 
             case R.string.string_message:
-                mTabBar.setSelectedIndex(1, false);
+                mTabBar.setSelectedIndex(2, false);
                 addMessageFragment();
                 break;
 
@@ -356,11 +359,11 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
     /**
      * Add the timeline fragment
      */
-    private void addTimeLineFragment() {
+    private void addHomeFragment() {
         lnrEditIconProfile.setVisibility(View.INVISIBLE);
         FragmentManager fm = getSupportFragmentManager();
         fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        FeedsFragment fragment = FeedsFragment.newInstance(getString(R.string.string_feed));
+        HomeFragment fragment = HomeFragment.newInstance(getString(R.string.string_feed));
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
@@ -378,6 +381,10 @@ public class MainActivity extends BaseActivity implements MenuItemInteraction {
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
+
+    private void addCommunityFragment() {
+    }
+
 
     /**
      * Add the profile fragment
