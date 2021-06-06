@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
-/*import com.bumptech.glide.load.resource.drawable.GlideDrawable;*/
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
@@ -199,7 +198,7 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
                                     .load(uri.toString())
                                     .listener(new RequestListener<Drawable>() {
                                         @Override
-                                        public boolean onLoadFailed(@Nullable @org.jetbrains.annotations.Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                                             mProgressBar.setVisibility(View.INVISIBLE);
                                             spinnerView.setVisibility(View.GONE);
                                             return false;

@@ -30,7 +30,6 @@ import com.atleta.fragments.MyProfileFragment;
 import com.atleta.fragments.HomeFragment;
 import com.atleta.interfaces.MenuItemInteraction;
 import com.atleta.models.MenuItem;
-import com.atleta.models.MyJobsModel;
 import com.atleta.models.Session;
 import com.atleta.utils.AppPreferences;
 import com.atleta.utils.AtletaApplication;
@@ -154,9 +153,6 @@ public class HomeActivity extends BaseActivity implements MenuItemInteraction {
 
         lnrEditIconProfile.setOnClickListener(v -> {
             Session editSession = AppPreferences.getSession();
-            Intent intent = new Intent(HomeActivity.this, UserProfilePreferencesActivity.class);
-            intent.putExtra(Keys.MOBILE_NUMBER, editSession.getUserModel().getMobileNumber());
-            startActivity(intent);
         });
 
     }
@@ -228,11 +224,6 @@ public class HomeActivity extends BaseActivity implements MenuItemInteraction {
                                 String skills = map.get("skills_required");
                                 String key = map.get("key");
 
-
-                                MyJobsModel model = new MyJobsModel(jobname, description, date, category, yearofexperience, skills, budgets, "", key);
-                                if (!TextUtils.isEmpty(jobname) && !TextUtils.isEmpty(description)) {
-
-                                }
                                 break;
 
                             case Keys.TYPE_PROFILE_SELECTED:

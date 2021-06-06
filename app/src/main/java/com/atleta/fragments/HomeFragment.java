@@ -237,7 +237,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 fragment = FeedPostFragment.newInstance("Feeds");
 
             if (position == 1)
-                fragment = FeedPostFragment.newInstance("Community");
+                fragment = CommunityFragment.newInstance("Community");
 
             if (position == 2)
                 fragment = FeedPostFragment.newInstance("Challenges");

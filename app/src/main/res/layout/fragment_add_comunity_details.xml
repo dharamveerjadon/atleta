@@ -223,11 +223,12 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
+                        android:id="@+id/image_cover"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:background="@color/colorWhite"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_placeholder" />
+                        android:src="@drawable/gradient_red" />
 
                     <ImageView
                         android:id="@+id/img_update_header"

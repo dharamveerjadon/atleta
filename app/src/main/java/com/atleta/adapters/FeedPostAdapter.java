@@ -1,6 +1,9 @@
 package com.atleta.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,18 +12,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 import com.atleta.R;
-import com.atleta.customview.Tag;
-import com.atleta.customview.TagView;
-import com.atleta.models.MyJobsModel;
+import com.atleta.models.PostModel;
+import com.atleta.utils.AtletaApplication;
 import com.atleta.utils.Constants;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,18 +43,20 @@ public class FeedPostAdapter extends BaseAdapter {
     @SuppressWarnings("CanBeFinal")
     private final LayoutInflater mInflater;
     private final Context context;
-    private List<MyJobsModel> mItems;
+    private List<PostModel> mItems;
+     Activity activity;
     private long mItemCountOnServer;
 
-    public FeedPostAdapter(Context context, FeedPostAdapter.OnItemClickListener onItemClickListener) {
+    public FeedPostAdapter(Context context, Activity activity,  FeedPostAdapter.OnItemClickListener onItemClickListener) {
         this.context = context;
+        this.activity = activity;
         mOnItemClickListener = onItemClickListener;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
 
     public interface OnItemClickListener {
-        void onItemClick(MyJobsModel item);
+        void onItemClick(PostModel item);
     }
 
     /**
@@ -56,7 +65,7 @@ public class FeedPostAdapter extends BaseAdapter {
      * @param items             article items
      * @param itemCountOnServer total item count on the server
      */
-    public void setItems(final List<MyJobsModel> items, final long itemCountOnServer) {
+    public void setItems(final List<PostModel> items, final long itemCountOnServer) {
         mItems = items;
         mItemCountOnServer = itemCountOnServer;
         notifyDataSetChanged();
@@ -69,7 +78,7 @@ public class FeedPostAdapter extends BaseAdapter {
      * @param items             items list
      * @param itemCountOnServer item count on server
      */
-    public void addItems(int start, final List<MyJobsModel> items, final long itemCountOnServer) {
+    public void addItems(int start, final List<PostModel> items, final long itemCountOnServer) {
         //remove the expire result of this page due to caching
         mItems.subList(start, mItems.size()).clear();
 
@@ -93,7 +102,7 @@ public class FeedPostAdapter extends BaseAdapter {
      *
      * @return article items
      */
-    public List<MyJobsModel> getItems() {
+    public List<PostModel> getItems() {
         return mItems;
     }
 
@@ -128,7 +137,7 @@ public class FeedPostAdapter extends BaseAdapter {
         View v = convertView;
         switch (viewType) {
             case TYPE_ITEM:
-                final MyJobsModel item = mItems.get(position);
+                final PostModel item = mItems.get(position);
                 ItemViewHolder itemViewHolder;
                 if (v == null) {
                     v = mInflater.inflate(R.layout.item_feed_atleta, parent, false);
@@ -137,7 +146,7 @@ public class FeedPostAdapter extends BaseAdapter {
                 } else {
                     itemViewHolder = (ItemViewHolder) v.getTag();
                 }
-                itemViewHolder.bind(context, item);
+                itemViewHolder.bind(context, activity, item);
                 return v;
 
             default:
@@ -160,8 +169,8 @@ public class FeedPostAdapter extends BaseAdapter {
         private final ImageView imgHeart, imgComment, imgForward, imgCollection;
         private final TextView txtLikes, txtCommentView;
         // current bind to view holder
-        private MyJobsModel mCurrentItem;
-
+        private PostModel mCurrentItem;
+        SliderPagerAdapter sliderPagerAdapter;
         ItemViewHolder(@NonNull View view, final FeedPostAdapter.OnItemClickListener listener) {
             mOnItemClickListener = listener;
             view.setOnClickListener(this);
@@ -191,13 +200,36 @@ public class FeedPostAdapter extends BaseAdapter {
          *
          * @param item article item
          */
-        void bind(Context context, final MyJobsModel item) {
+        void bind(Context context, Activity activity, final PostModel item) {
             mCurrentItem = item;
 
-            mHeaderTitle.setText(item.getTitle());
-            mHeaderSubTitle.setText(item.getDescription());
-            txtLikes.setText(setDateFormat(item.getDate()));
-            txtCommentView.setText(item.getYearOfExperience() + " Yrs experience");
+            if(!TextUtils.isEmpty(item.getCreatedByImage())) {
+                Glide.with(AtletaApplication.sharedInstance())
+                        .load(item.getCreatedByImage())
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                return false;
+                            }
+                        })
+                        .placeholder(R.drawable.ic_avatar)
+                        .dontAnimate()
+                        .into(mProfileImage);
+            }
+
+            sliderPagerAdapter = new SliderPagerAdapter(activity, item.getPostImages());
+            viewPager.setAdapter(sliderPagerAdapter);
+            dotsIndicator.setViewPager(viewPager);
+
+            mHeaderTitle.setText(item.getCreatedBy());
+            mHeaderSubTitle.setText(setDateFormat(item.getCreatedDate()));
+            txtLikes.setText(setDateFormat(item.getLikesCount()+" Likes"));
+            txtCommentView.setText(item.getPostCommentCount() + " Comments");
 
         }
 

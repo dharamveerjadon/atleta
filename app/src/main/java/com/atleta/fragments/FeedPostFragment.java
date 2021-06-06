@@ -17,14 +17,13 @@ import com.atleta.R;
 import com.atleta.activities.HomeActivity;
 import com.atleta.adapters.FeedPostAdapter;
 import com.atleta.customview.SpinnerView;
-import com.atleta.models.MyJobsModel;
+import com.atleta.models.PostModel;
 import com.atleta.utils.AtletaApplication;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -61,12 +60,12 @@ public class FeedPostFragment extends BaseFragment implements FeedPostAdapter.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_my_waiting, container, false);
+        View view = inflater.inflate(R.layout.fragment_feed_post, container, false);
 
         viewById(view);
 
         if (mAdapter == null) {
-            mAdapter = new FeedPostAdapter(this.getContext(), this);
+            mAdapter = new FeedPostAdapter(this.getContext(), getActivity(), this);
         }
 
         listRequirement.setAdapter(mAdapter);
@@ -91,12 +90,11 @@ public class FeedPostFragment extends BaseFragment implements FeedPostAdapter.On
             AtletaApplication.sharedDatabaseInstance().child("Feeds").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    List<MyJobsModel> myJob = new ArrayList<>();
+                    List<PostModel> myJob = new ArrayList<>();
 
                     if (myJob.size() > 0) {
                         listRequirement.setVisibility(View.VISIBLE);
                         noRecordFound.setVisibility(GONE);
-                        Collections.sort(myJob);
 
                         mAdapter.setItems(myJob, 10);
                     } else {
@@ -118,7 +116,7 @@ public class FeedPostFragment extends BaseFragment implements FeedPostAdapter.On
 
 
     @Override
-    public void onItemClick(MyJobsModel item) {
+    public void onItemClick(PostModel item) {
 
     }
 }

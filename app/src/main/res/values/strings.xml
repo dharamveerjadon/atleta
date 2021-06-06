@@ -51,4 +51,17 @@
     <string name="title_activity_add_feed">AddFeedActivity</string>
     <string name="string_progress_msg">Please wait…</string>
 
+    <string-array name="community_topic">
+        <item>Select topic</item>
+        <item>Basketball</item>
+        <item>Cricket</item>
+        <item>Fitness</item>
+        <item>Football</item>
+    </string-array>
+
+    <string-array name="community_scope">
+        <item>Everyone</item>
+        <item>Owner only</item>
+        <item>Owner internal</item>
+    </string-array>
 </resources>

@@ -20,11 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.bumptech.glide.Glide;
-/*import com.bumptech.glide.load.resource.drawable.GlideDrawable;*/
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.atleta.R;
 import com.atleta.adapters.MenuAdapter;
 import com.atleta.interfaces.MenuItemInteraction;
@@ -34,6 +29,11 @@ import com.atleta.models.UserModel;
 import com.atleta.utils.AppPreferences;
 import com.atleta.utils.Keys;
 import com.atleta.utils.AtletaApplication;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,9 +84,12 @@ public class MenuFragment extends BaseFragment {
 
             Glide.with(AtletaApplication.sharedInstance())
                     .load(session.getUserModel().getProfile_image_url())
+                    .placeholder(R.drawable.ic_avatar) // can also be a drawable
+                    .error(R.drawable.ic_avatar) // will be displayed if the image cannot be loaded
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .listener(new RequestListener<Drawable>() {
                         @Override
-                        public boolean onLoadFailed(@Nullable @org.jetbrains.annotations.Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                             return false;
                         }
 
@@ -95,9 +98,8 @@ public class MenuFragment extends BaseFragment {
                             return false;
                         }
                     })
-                    .placeholder(R.drawable.ic_avatar)
-                    .dontAnimate()
                     .into(mImvMember);
+
         }
 
     }
