@@ -16,6 +16,7 @@ public class AppPreferences {
     private static final String SESSION = "session";
     private static final String IS_PREFERENCE_ADDED = "is_preference_added";
     public static final String SELECTED_HOME_SCREEN = "selected_home_screen";
+    public static final String IS_FIRST_ENTRY_USER = "is_first_entry_user";
     public static final String IsCONGRATULATIONACTIONDONE = "is_congratulation_done";
 
     private static final String IS_FCM_TOKEN = "IS_FCM_TOKEN";
@@ -63,6 +64,17 @@ public class AppPreferences {
         editor.putInt(key, value);
         editor.apply();
     }
+
+    public static boolean isFirstEntryUser() {
+        return mSharedPreferences.getBoolean(IS_FIRST_ENTRY_USER, true);
+    }
+
+    public static void setFirstEntryUser(String key, @Nullable boolean value) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putBoolean(key, value);
+        editor.apply();
+    }
+
 
     public static boolean IsCongratulationDone() {
         return mSharedPreferences.getBoolean(IsCONGRATULATIONACTIONDONE, false);

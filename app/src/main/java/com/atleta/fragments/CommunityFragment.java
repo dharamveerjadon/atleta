@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.atleta.R;
 import com.atleta.activities.HomeActivity;
@@ -36,7 +38,7 @@ import static android.view.View.GONE;
 public class CommunityFragment extends BaseFragment implements CommunityAdapter.OnItemClickListener {
 
     private CommunityAdapter mAdapter;
-    private ListView listRequirement;
+    private RecyclerView listRequirement;
     private ImageView noRecordFound;
     private HomeActivity activity;
     private SpinnerView spinnerView;
@@ -77,6 +79,8 @@ public class CommunityFragment extends BaseFragment implements CommunityAdapter.
 
     private void viewById(View view) {
         listRequirement = view.findViewById(R.id.listView);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+        listRequirement.setLayoutManager(gridLayoutManager);
         spinnerView = view.findViewById(R.id.spinnerView);
         noRecordFound = view.findViewById(R.id.no_record_found);
 

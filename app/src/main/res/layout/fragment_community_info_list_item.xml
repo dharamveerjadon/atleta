@@ -36,16 +36,15 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/gradient_orange" />
 
-                <Button
+                <ImageView
                     android:id="@+id/btn_join"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/gradient_orange"
-                    android:text="Join"
                     android:layout_marginRight="@dimen/margin_default_half"
-                    android:layout_marginTop="120dp"
+                    android:layout_marginTop="150dp"
                     android:layout_gravity="end"
-                    android:textColor="@color/colorWhite" />
+                    android:src="@drawable/ic_heart"
+                     />
             </FrameLayout>
 
             <com.atleta.customview.AtletaTextView
@@ -55,8 +54,9 @@
                 android:layout_marginLeft="@dimen/margin_default_double"
                 android:gravity="center"
                 android:text="@string/app_name"
+                android:maxLines="1"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:appFont="Poppins-Regular" />
 
             <com.atleta.customview.AtletaTextView
@@ -66,8 +66,11 @@
                 android:layout_marginLeft="@dimen/margin_default_double"
                 android:layout_marginTop="@dimen/margin_default"
                 android:text="@string/app_name"
+                android:maxLines="2"
+                android:minLines="2"
+                android:ellipsize="end"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:appFont="Poppins-Regular" />
 
             <com.atleta.customview.AtletaTextView

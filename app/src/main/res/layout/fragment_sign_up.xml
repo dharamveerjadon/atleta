@@ -86,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="4sp"
-                    android:text="Display Name"
+                    android:text="Name"
                     app:appFont="Poppins-Regular"
                     android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
@@ -180,7 +180,7 @@
                     android:elevation="4dp"
                     app:appFont="Poppins-Regular"
                     android:textColor="@android:color/white"
-                    android:text="Register &amp; Login"
+                    android:text="Next"
                     android:textAllCaps="false" />
 
                 <LinearLayout
@@ -205,7 +205,7 @@
     </FrameLayout>
 
     <com.atleta.customview.SpinnerView
-        android:id="@+id/progress_bar"
+        android:id="@+id/spinnerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"

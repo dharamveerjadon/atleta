@@ -354,7 +354,7 @@ public class HomeActivity extends BaseActivity implements MenuItemInteraction {
         lnrEditIconProfile.setVisibility(View.INVISIBLE);
         FragmentManager fm = getSupportFragmentManager();
         fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        HomeFragment fragment = HomeFragment.newInstance(getString(R.string.string_feed));
+        HomeFragment fragment = HomeFragment.newInstance(getString(R.string.app_name));
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();

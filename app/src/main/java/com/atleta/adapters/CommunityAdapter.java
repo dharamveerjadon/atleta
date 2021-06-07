@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.atleta.R;
@@ -33,7 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class CommunityAdapter extends BaseAdapter {
+public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.ItemViewHolder> {
 
     //corporate list view
     private static final int TYPE_ITEM = 0;
@@ -89,16 +90,6 @@ public class CommunityAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-
-    @Override
-    public int getCount() {
-        if (mItems == null) {
-            return 0;
-        }
-        //plus one for footer
-        return mItems.size();
-    }
-
     /**
      * get the article items
      *
@@ -109,18 +100,36 @@ public class CommunityAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return mItems.get(position);
-    }
-
-    @Override
     public long getItemId(int position) {
         return 0;
     }
 
     @Override
-    public int getViewTypeCount() {
-        return 2;
+    public int getItemCount() {
+        if (mItems == null) {
+            return 0;
+        }
+        //plus one for footer
+        return mItems.size();
+    }
+
+
+    @NonNull
+    @Override
+    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+        // Inflate the custom layout
+        View contactView = inflater.inflate(R.layout.fragment_community_info_list_item, parent, false);
+
+        // Return a new holder instance
+        return new ItemViewHolder(contactView, mOnItemClickListener);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+        holder.bind(context,activity,mItems.get(position));
     }
 
     @Override
@@ -133,45 +142,22 @@ public class CommunityAdapter extends BaseAdapter {
         return TYPE_ITEM;
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        int viewType = this.getItemViewType(position);
-        View v = convertView;
-        switch (viewType) {
-            case TYPE_ITEM:
-                final AddCommunityModel item = mItems.get(position);
-                ItemViewHolder itemViewHolder;
-                if (v == null) {
-                    v = mInflater.inflate(R.layout.fragment_community_info_list_item, parent, false);
-                    itemViewHolder = new ItemViewHolder(v, mOnItemClickListener);
-                    v.setTag(itemViewHolder);
-                } else {
-                    itemViewHolder = (ItemViewHolder) v.getTag();
-                }
-                itemViewHolder.bind(context, activity, item);
-                return v;
-
-            default:
-                return mInflater.inflate(R.layout.fragment_blank, parent, false);
-
-        }
-    }
-
     /**
      * Item View Holder
      */
-    private static class ItemViewHolder implements View.OnClickListener {
+    public static class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         //view on click listener need to forward click events
         private final CommunityAdapter.OnItemClickListener mOnItemClickListener;
         private ImageView mProfileImage, mCoverImage;
         private final TextView mHeaderCommunityName, mHeaderCommunityDesc;
         private final TextView txtMember;
-        private Button btnJoin;
+        private ImageView btnJoin;
         // current bind to view holder
         private AddCommunityModel mCurrentItem;
         SliderPagerAdapter sliderPagerAdapter;
         ItemViewHolder(@NonNull View view, final CommunityAdapter.OnItemClickListener listener) {
+            super(view);
             mOnItemClickListener = listener;
             view.setOnClickListener(this);
             mProfileImage = view.findViewById(R.id.image_profile);
@@ -180,6 +166,7 @@ public class CommunityAdapter extends BaseAdapter {
             mHeaderCommunityDesc = view.findViewById(R.id.txt_community_description);
             txtMember = view.findViewById(R.id.txt_joined_member);
             btnJoin = view.findViewById(R.id.btn_join);
+
         }
 
         @Override

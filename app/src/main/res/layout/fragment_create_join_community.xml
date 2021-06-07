@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#191970">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:elevation="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_white_border_gray"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.atleta.customview.AtletaTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:padding="8dp"
+                    app:appFont="Poppins-Regular"
+                    android:text="Make your own community"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="4dp" />
+
+                <com.atleta.customview.AtletaTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:paddingBottom="4dp"
+                    app:appFont="Poppins-Regular"
+                    android:text="Create community"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:elevation="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_white_border_gray"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.atleta.customview.AtletaTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:padding="8dp"
+                    app:appFont="Poppins-Regular"
+                    android:text="Be a part of community"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="4dp" />
+
+                <com.atleta.customview.AtletaTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:padding="8dp"
+                    app:appFont="Poppins-Regular"
+                    android:text="Join community"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <com.atleta.customview.AtletaButton
+        android:id="@+id/btn_register"
+        style="@style/AppTheme.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_margin="24dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/border_button_orange"
+        android:elevation="4dp"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:appFont="Poppins-Regular" />
+
+    <com.atleta.customview.SpinnerView
+        android:id="@+id/spinnerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+</RelativeLayout>

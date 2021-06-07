@@ -6,7 +6,7 @@
     android:background="#E5E5E5"
     tools:context=".fragments.HomeFragment">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -20,7 +20,7 @@
         android:fontFamily="sans-serif-light"
         android:gravity="center"
         android:padding="@dimen/padding_default_double"
-        android:text="SPORTS. COMMUNITY. NETWORK."
+        android:text="Made in India"
         android:textColor="@color/colorBlack"
         android:textSize="16sp"
         android:layout_alignParentBottom="true"

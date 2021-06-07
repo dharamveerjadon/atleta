@@ -4,6 +4,7 @@ package com.atleta.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +54,7 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
         mEdtRepeatPassword = view.findViewById(R.id.edt_repeat_password);
         mEdtDisplayName = view.findViewById(R.id.edt_display_name);
         mBtnRegister = view.findViewById(R.id.btn_register);
-        spinnerView = view.findViewById(R.id.progress_bar);
+        spinnerView = view.findViewById(R.id.spinnerView);
     }
 
     private void registerListenerId() {
@@ -66,7 +67,7 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
 
         switch (v.getId()) {
             case R.id.btn_register:
-                if (isValidation()) {
+                if (!isValidation()) {
                     spinnerView.setVisibility(View.VISIBLE);
                     String userId = mEdtEmailId.getText().toString().trim();
                     String displayName = mEdtDisplayName.getText().toString().trim();
@@ -74,24 +75,10 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
                     String password = mEdtCreatePassword.getText().toString().trim();
                     String repeatPassword = mEdtRepeatPassword.getText().toString().trim();
                     boolean isAdmin = false;
-
-                    DatabaseReference signUpReference = AtletaApplication.sharedDatabaseInstance().child("Users");
-                    if(signUpReference != null) {
-                        final String key = signUpReference.push().getKey();
-                        final Session session = new Session(key, displayName, emailId, password, repeatPassword, new UserModel(), AppPreferences.getFcmToken(),false);
-                        signUpReference.child(key).setValue(session)
-                                .addOnSuccessListener(aVoid -> {
-                                    AppPreferences.setSession(session);
-                                        spinnerView.setVisibility(View.GONE);
-                                        Intent intent = new Intent(getActivity(), HomeActivity.class);
-                                        startActivity(intent);
-                                        getActivity().finish();
-
-                                })
-                                .addOnFailureListener(e ->
-                                        spinnerView.setVisibility(View.GONE)
-                                );
-                    }
+                    new Handler().postDelayed(() -> {
+                        spinnerView.setVisibility(View.GONE);
+                        pushFragment(SelectSportsType.newInstance(""), true);
+                    }, 3000);
 
                 }
 
@@ -103,7 +90,7 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
     private boolean isValidation() {
 
         if (TextUtils.isEmpty(mEdtDisplayName.getText().toString().trim())) {
-            mEdtDisplayName.setError("Enter display name here..");
+            mEdtDisplayName.setError("Enter name here..");
             mEdtDisplayName.requestFocus();
             return false;
         } else {
