@@ -2,6 +2,8 @@ package com.atleta.utils;
 
 import android.app.Application;
 
+import com.atleta.api.AtletaApiClient;
+import com.atleta.api.AtletaApiServices;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -17,6 +19,7 @@ public class AtletaApplication extends Application {
 
     private static AtletaApplication mSharedInstance;
     private static DatabaseReference mDatabase;
+    private static AtletaApiServices atletaApiServices;
 
 
     public static AtletaApplication sharedInstance() {
@@ -26,11 +29,17 @@ public class AtletaApplication extends Application {
         return mDatabase;
     }
 
+    public static AtletaApiServices sharedAtletaApiServicesInstance() {
+        return atletaApiServices;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         mSharedInstance = this;
         AppPreferences.init(this);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        atletaApiServices = AtletaApiClient.getClient(this)
+                .create(AtletaApiServices.class);
     }
 }

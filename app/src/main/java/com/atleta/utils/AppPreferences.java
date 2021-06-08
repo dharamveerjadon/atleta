@@ -20,6 +20,7 @@ public class AppPreferences {
     public static final String IsCONGRATULATIONACTIONDONE = "is_congratulation_done";
 
     private static final String IS_FCM_TOKEN = "IS_FCM_TOKEN";
+    private static final String IS_API_TOKEN = "IS_API_TOKEN";
 
     private static SharedPreferences mSharedPreferences;
     //ref to the last updated session
@@ -274,14 +275,30 @@ public class AppPreferences {
      *
      * @return true/false
      */
-    public static String getFcmToken() {
+    public static String getApiKey() {
         return mSharedPreferences.getString(IS_FCM_TOKEN, null);
     }
 
     /**
      * mark fcm token send on server
      */
-    public static void setFcmToken(String token) {
+    public static void setApiKey(String token) {
         putString(IS_FCM_TOKEN, token);
+    }
+
+    /**
+     * is API token send on server
+     *
+     * @return true/false
+     */
+    public static String getFcmToken() {
+        return mSharedPreferences.getString(IS_API_TOKEN, null);
+    }
+
+    /**
+     * mark API token send on server
+     */
+    public static void setFcmToken(String token) {
+        putString(IS_API_TOKEN, token);
     }
 }

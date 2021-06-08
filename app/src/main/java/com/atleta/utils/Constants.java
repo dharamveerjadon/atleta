@@ -89,4 +89,10 @@ public class Constants {
     public static final boolean DEFAULT_TAG_IS_DELETABLE = false;
     public static String device = "ANDROID";
 
+
+    public static final String BASE_URL = "https://demo.androidhive.info/";
+
+
+
+
 }
