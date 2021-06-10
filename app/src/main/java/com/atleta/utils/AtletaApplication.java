@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.atleta.api.AtletaApiClient;
 import com.atleta.api.AtletaApiServices;
+import com.atleta.api.HttpsTrustManager;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

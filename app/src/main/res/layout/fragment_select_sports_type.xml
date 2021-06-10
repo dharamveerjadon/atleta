@@ -56,7 +56,7 @@
                     app:cardCornerRadius="16dp">
 
                     <LinearLayout
-                        android:id="@+id/fl_truck"
+                        android:id="@+id/fl_basketball"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_white_border_gray"
@@ -64,12 +64,14 @@
                         android:orientation="vertical">
 
                         <ImageView
+                            android:id="@+id/img_basketball"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:paddingTop="4dp" />
 
                         <com.atleta.customview.AtletaTextView
+                            android:id="@+id/txt_basketball"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|center"
@@ -93,7 +95,7 @@
                     app:cardCornerRadius="16dp">
 
                     <LinearLayout
-                        android:id="@+id/fl_trailers"
+                        android:id="@+id/fl_football"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_white_border_gray"
@@ -101,12 +103,14 @@
                         android:orientation="vertical">
 
                         <ImageView
+                            android:id="@+id/img_football"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:paddingTop="4dp" />
 
                         <com.atleta.customview.AtletaTextView
+                            android:id="@+id/txt_football"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|center"
@@ -139,7 +143,7 @@
                     app:cardCornerRadius="16dp">
 
                     <LinearLayout
-                        android:id="@+id/fl_parts_accessories"
+                        android:id="@+id/fl_cricket"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_white_border_gray"
@@ -147,12 +151,14 @@
                         android:orientation="vertical">
 
                         <ImageView
+                            android:id="@+id/img_cricket"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:paddingTop="4dp" />
 
                         <com.atleta.customview.AtletaTextView
+                            android:id="@+id/txt_cricket"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|center"
@@ -176,7 +182,7 @@
                     app:cardCornerRadius="16dp">
 
                     <LinearLayout
-                        android:id="@+id/fl_wish_list"
+                        android:id="@+id/fl_fitness"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_white_border_gray"
@@ -184,12 +190,14 @@
                         android:orientation="vertical">
 
                         <ImageView
+                            android:id="@+id/img_fitness"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:paddingTop="4dp" />
 
                         <com.atleta.customview.AtletaTextView
+                            android:id="@+id/txt_fitness"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|center"
@@ -222,7 +230,7 @@
                     app:cardCornerRadius="16dp">
 
                     <LinearLayout
-                        android:id="@+id/fl_try_truck_land"
+                        android:id="@+id/fl_hockey"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_white_border_gray"
@@ -230,12 +238,14 @@
                         android:orientation="vertical">
 
                         <ImageView
+                            android:id="@+id/img_hockey"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:paddingTop="4dp" />
 
                         <com.atleta.customview.AtletaTextView
+                            android:id="@+id/txt_hockey"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|center"
@@ -259,6 +269,7 @@
                     app:cardCornerRadius="16dp">
 
                     <LinearLayout
+                        android:id="@+id/fl_other"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_white_border_gray"
@@ -266,12 +277,14 @@
                         android:orientation="vertical">
 
                         <ImageView
+                            android:id="@+id/img_other"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:paddingTop="4dp" />
 
                         <com.atleta.customview.AtletaTextView
+                            android:id="@+id/txt_other"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|center"

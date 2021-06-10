@@ -90,7 +90,7 @@ public class Constants {
     public static String device = "ANDROID";
 
 
-    public static final String BASE_URL = "https://demo.androidhive.info/";
+    public static final String BASE_URL = "https://www.obhee.co.in/public/api/";
 
 
 

@@ -12,6 +12,8 @@ public class Session implements Parcelable {
     private String emailId;
     private String createPassword;
     private String repeatpassword;
+    private String number;
+    private String dob;
     private UserModel userModel;
     private String userToken;
     private String actionType;
@@ -28,16 +30,7 @@ public class Session implements Parcelable {
 
 
 public Session() {}
-    public Session(String userId, String displayName, String emailId, String createPassword, String repeatpassword, UserModel userModel, String userToken, boolean isAdmin) {
-        this.userId = userId;
-        this.displayName = displayName;
-        this.emailId = emailId;
-        this.createPassword = createPassword;
-        this.repeatpassword = repeatpassword;
-        this.userModel = userModel;
-        this.userToken = userToken;
-        this.isAdmin = isAdmin;
-    }
+
 
     public Session( String mobileNumber, UserModel userModel, String userToken) {
         this.userModel = userModel;
@@ -48,6 +41,8 @@ public Session() {}
     protected Session(Parcel in) {
         userId = in.readString();
         emailId = in.readString();
+        createPassword = in.readString();
+        number = in.readString();
         createPassword = in.readString();
         repeatpassword = in.readString();
         userToken = in.readString();

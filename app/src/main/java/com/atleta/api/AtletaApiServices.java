@@ -18,7 +18,7 @@ public interface AtletaApiServices {
 
     // Register new user
     @FormUrlEncoded
-    @POST("notes/user/register")
-    Single<Session> register(@Field("device_id") String deviceId);
+    @POST("sign-up")
+    Single<Session> register(@Field("name") String name, @Field("email") String email, @Field("password") String password, @Field("number") String number,  @Field("gender") String gender , @Field("dob") String dob,  @Field("sports") String sports);
 
 }
