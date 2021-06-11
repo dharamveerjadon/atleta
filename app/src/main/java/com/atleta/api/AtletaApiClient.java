@@ -4,27 +4,28 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.atleta.utils.AppPreferences;
-
 import com.atleta.utils.Constants;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.TlsVersion;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AtletaApiClient {
 
+    private static final int REQUEST_TIMEOUT = 60;
     private static Retrofit retrofit = null;
-    private static int REQUEST_TIMEOUT = 60;
     private static OkHttpClient okHttpClient;
 
     public static Retrofit getClient(Context context) {
@@ -33,11 +34,17 @@ public class AtletaApiClient {
             initOkHttp(context);
 
         if (retrofit == null) {
+
+            Gson gsonBuilder = new GsonBuilder()
+                    .setLenient()
+                    .create();
+
+
             retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
                     .client(okHttpClient)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
                     .build();
         }
         return retrofit;

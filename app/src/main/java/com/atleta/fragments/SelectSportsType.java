@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 
 import com.atleta.R;
 import com.atleta.activities.FirstUserEntryActivity;
@@ -19,6 +20,7 @@ import com.atleta.customview.SpinnerView;
 import com.atleta.models.ItemViewStateModel;
 import com.atleta.models.Session;
 import com.atleta.utils.AtletaApplication;
+import com.atleta.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -106,26 +108,31 @@ public class SelectSportsType extends BaseFragment implements View.OnClickListen
 
         switch (v.getId()) {
             case R.id.btn_register:
-                spinnerView.setVisibility(View.VISIBLE);
-                // Fetching all notes
-                AtletaApplication.sharedAtletaApiServicesInstance().register("name", "name@gmail.com", "123", "123456789", "male", "10/05/1995", "1,2,3")
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(new DisposableSingleObserver<Session>() {
-                            @Override
-                            public void onSuccess(@NonNull Session session) {
-                                new Handler().postDelayed(() -> {
-                                    spinnerView.setVisibility(View.GONE);
-                                    startActivity(new Intent(getActivity().getApplicationContext(), FirstUserEntryActivity.class));
-                                    getActivity().finish();
-                                }, 3000);
-                            }
+                if(sportsType.size() > 0) {
+                    spinnerView.setVisibility(View.VISIBLE);
+                    // Fetching all notes
+                    AtletaApplication.sharedAtletaApiServicesInstance().register("name", "name@gmail.com", "123", "123456789", "male", "10/05/1995", "1,2,3")
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeWith(new DisposableSingleObserver<Session>() {
+                                @Override
+                                public void onSuccess(@NonNull Session session) {
+                                    new Handler().postDelayed(() -> {
+                                        spinnerView.setVisibility(View.GONE);
+                                        startActivity(new Intent(getActivity().getApplicationContext(), FirstUserEntryActivity.class));
+                                        getActivity().finish();
+                                    }, 3000);
+                                }
 
-                            @Override
-                            public void onError(@NonNull Throwable e) {
-                                spinnerView.setVisibility(View.GONE);
-                            }
-                        });
+                                @Override
+                                public void onError(@NonNull Throwable e) {
+                                    spinnerView.setVisibility(View.GONE);
+                                }
+                            });
+                }else {
+                    Utils.showToast(getActivity(), getActivity().findViewById(R.id.fragment_container),"Please select your favourite game");
+                }
+
                 break;
             case R.id.fl_basketball: changeBasketBallColorState(isBasketball);break;
             case R.id.fl_football: changeFootballColorState(isFootball);break;
@@ -142,7 +149,11 @@ public class SelectSportsType extends BaseFragment implements View.OnClickListen
             isBasketball = false;
             lnBasketball.setBackground(getResources().getDrawable(R.drawable.bg_white_border_gray));
             txtBasketBall.setTextColor(getResources().getColor(R.color.colorBlack));
-            sportsType.remove(item);
+            for(int i = 0; i< sportsType.size(); i++) {
+               if(sportsType.get(i).getId().equals("1")) {
+                   sportsType.remove(i);
+               }
+            }
         }else {
             isBasketball = true;
             lnBasketball.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -157,7 +168,11 @@ public class SelectSportsType extends BaseFragment implements View.OnClickListen
             isFootball = false;
             lnFootball.setBackground(getResources().getDrawable(R.drawable.bg_white_border_gray));
             txtFootball.setTextColor(getResources().getColor(R.color.colorBlack));
-            sportsType.remove(item);
+             for(int i = 0; i< sportsType.size(); i++) {
+                 if (sportsType.get(i).getId().equals("2")) {
+                     sportsType.remove(i);
+                 }
+             }
         }else {
             isFootball = true;
             lnFootball.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -173,7 +188,11 @@ public class SelectSportsType extends BaseFragment implements View.OnClickListen
             isCricket = false;
             lnCricket.setBackground(getResources().getDrawable(R.drawable.bg_white_border_gray));
             txtCricket.setTextColor(getResources().getColor(R.color.colorBlack));
-            sportsType.remove(item);
+            for(int i = 0; i< sportsType.size(); i++) {
+                if (sportsType.get(i).getId().equals("3")) {
+                    sportsType.remove(i);
+                }
+            }
         }else {
             isCricket = true;
             lnCricket.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -189,7 +208,11 @@ public class SelectSportsType extends BaseFragment implements View.OnClickListen
             isFitness = false;
             lnFitness.setBackground(getResources().getDrawable(R.drawable.bg_white_border_gray));
             txtFitness.setTextColor(getResources().getColor(R.color.colorBlack));
-            sportsType.remove(item);
+            for(int i = 0; i< sportsType.size(); i++) {
+                if (sportsType.get(i).getId().equals("4")) {
+                    sportsType.remove(i);
+                }
+            }
         }else {
             isFitness = true;
             lnFitness.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -205,7 +228,11 @@ public class SelectSportsType extends BaseFragment implements View.OnClickListen
             isHockey = false;
             lnHockey.setBackground(getResources().getDrawable(R.drawable.bg_white_border_gray));
             txtHockey.setTextColor(getResources().getColor(R.color.colorBlack));
-            sportsType.remove(item);
+            for(int i = 0; i< sportsType.size(); i++) {
+                if (sportsType.get(i).getId().equals("5")) {
+                    sportsType.remove(i);
+                }
+            }
         }else {
             isHockey = true;
             lnHockey.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -221,7 +248,11 @@ public class SelectSportsType extends BaseFragment implements View.OnClickListen
             isOther = false;
             lnOther.setBackground(getResources().getDrawable(R.drawable.bg_white_border_gray));
             txtOther.setTextColor(getResources().getColor(R.color.colorBlack));
-            sportsType.remove(item);
+            for(int i = 0; i< sportsType.size(); i++) {
+                if (sportsType.get(i).getId().equals("6")) {
+                    sportsType.remove(i);
+                }
+            }
         }else {
             isOther = true;
             lnOther.setBackgroundColor(getResources().getColor(R.color.colorAccent));

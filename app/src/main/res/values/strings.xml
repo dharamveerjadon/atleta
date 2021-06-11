@@ -64,4 +64,7 @@
         <item>Owner only</item>
         <item>Owner internal</item>
     </string-array>
+
+    <string name="facebook_app_id">347094203513363</string>
+    <string name="fb_login_protocol_scheme">fb347094203513363</string>
 </resources>

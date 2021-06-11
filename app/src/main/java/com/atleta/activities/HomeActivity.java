@@ -1,22 +1,31 @@
 package com.atleta.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.places.Places;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -35,6 +44,12 @@ import com.atleta.utils.AppPreferences;
 import com.atleta.utils.AtletaApplication;
 import com.atleta.utils.Keys;
 import com.atleta.utils.Utils;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,22 +62,25 @@ import java.util.List;
 
 import static com.atleta.utils.AppPreferences.SELECTED_HOME_SCREEN;
 
-public class HomeActivity extends BaseActivity implements MenuItemInteraction {
+public class HomeActivity extends BaseActivity implements MenuItemInteraction ,  GoogleApiClient.OnConnectionFailedListener,  GoogleApiClient.ConnectionCallbacks, LocationListener {
     //toolbar
     private Toolbar mToolbar;
     private TextView toolbarTitle;
-    private boolean isFirstEntry;
-    private String mobileNumber;
+    private final String TAG = this.getClass().getSimpleName();
     private ActionBar actionBar;
+    private static final int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+    private static final int REQUEST_CHECK_SETTINGS = 555;
     private LinearLayout lnrEditIconProfile;
     //Reference to drawer layout to open or hide the menu
     private DrawerLayout mDrawerLayout;
-
+    public static GoogleApiClient mGoogleApiClient;
     // This is drawer listener to close and open the drawer
     private ActionBarDrawerToggle mDrawerToggle;
     //bottom tab bar
     private TabBar mTabBar;
-
+    public double currentLatitude;
+    public double currentLongitude;
+    private LocationRequest mLocationRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +123,14 @@ public class HomeActivity extends BaseActivity implements MenuItemInteraction {
 
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
+
+
+        // Create the LocationRequest object
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
+                .setFastestInterval(1000); // 1 second, in milliseconds
+
 
         mTabBar = findViewById(R.id.tab_bar);
         List<MenuItem> items = new ArrayList<>();
@@ -150,12 +176,30 @@ public class HomeActivity extends BaseActivity implements MenuItemInteraction {
 
 
         getdata(session);
-
+        googlePlusInitalize();
         lnrEditIconProfile.setOnClickListener(v -> {
             Session editSession = AppPreferences.getSession();
         });
 
     }
+
+    //================== GooglePlusLogin ======================================
+    public void googlePlusInitalize() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+
 
     @Override
     protected void syncActionBarArrowState() {
@@ -406,6 +450,7 @@ public class HomeActivity extends BaseActivity implements MenuItemInteraction {
     @Override
     protected void onResume() {
         super.onResume();
+        mGoogleApiClient.connect();
         int index = AppPreferences.getSelectedHomeScreen();
         if (index >= 0 && index < 3) {
             MenuItem menuItem = mTabBar.getMenuItem(index);
@@ -414,13 +459,83 @@ public class HomeActivity extends BaseActivity implements MenuItemInteraction {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        if (mGoogleApiClient.isConnected()) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
+        mGoogleApiClient.stopAutoManage(this);
+        mGoogleApiClient.disconnect();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         AppPreferences.setSelectedHomeScreen(SELECTED_HOME_SCREEN, 0);
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+        if (location == null) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        } else {
+            handleNewLocation(location);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CHECK_SETTINGS) {
+            switch (resultCode) {
+                case Activity.RESULT_OK:
+                    Log.i(TAG, "User agreed to make required location settings changes.");
+                    mGoogleApiClient.reconnect();
+                    break;
+                case Activity.RESULT_CANCELED:
+                    Log.i(TAG, "User chose not to make required location settings changes.");
+                    break;
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+    private void handleNewLocation(Location location) {
+        currentLatitude = location.getLatitude();
+        currentLongitude = location.getLongitude();
+    }
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        if (connectionResult.hasResolution()) {
+            try {
+                // Start an Activity that tries to resolve the error
+                connectionResult.startResolutionForResult(this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
+            } catch (IntentSender.SendIntentException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.i(TAG, "Location services connection failed with code " + connectionResult.getErrorCode());
+        }
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        handleNewLocation(location);
     }
 }

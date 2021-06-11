@@ -5,6 +5,8 @@ import android.app.Application;
 import com.atleta.api.AtletaApiClient;
 import com.atleta.api.AtletaApiServices;
 import com.atleta.api.HttpsTrustManager;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -42,5 +44,8 @@ public class AtletaApplication extends Application {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         atletaApiServices = AtletaApiClient.getClient(this)
                 .create(AtletaApiServices.class);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
     }
 }

@@ -12,4 +12,5 @@
 
     <string name="error_password_not_match">Confirm password not matched with password.</string>
 
+    <string name="string_social_error">Something went wrong! Please try again later.</string>
 </resources>

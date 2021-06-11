@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import android.os.Handler;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.atleta.controllers.SocialLoginController;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +40,7 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
     private SpinnerView spinnerView;
     private  Session session;
     private SignUpActivity activity;
-
+    public SocialLoginController socialLoginController;
     public static SignInFragment newInstance(@SuppressWarnings("SameParameterValue") String title) {
         SignInFragment fragment = new SignInFragment();
         Bundle args = new Bundle();
@@ -64,6 +66,12 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
         return rootView;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        socialLoginController = new SocialLoginController(activity,view,
+                spinnerView, SignInFragment.this, SignInFragment.class.getSimpleName().toString());
+    }
 
     private void findViewById(View view) {
         mEdtLoginId = view.findViewById(R.id.edt_login_id);

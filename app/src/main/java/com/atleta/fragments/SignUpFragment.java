@@ -1,6 +1,7 @@
 package com.atleta.fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,7 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.Nullable;
+
 import com.atleta.activities.HomeActivity;
+import com.atleta.activities.SignUpActivity;
+import com.atleta.controllers.SocialLoginController;
 import com.google.firebase.database.DatabaseReference;
 import com.atleta.R;
 import com.atleta.customview.SpinnerView;
@@ -27,7 +32,8 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
     private EditText mEdtDisplayName, mEdtEmailId, mEdtCreatePassword, mEdtRepeatPassword;
     private Button mBtnRegister;
     private SpinnerView spinnerView;
-
+    private SignUpActivity activity;
+    public SocialLoginController socialLoginController;
     public static SignUpFragment newInstance(@SuppressWarnings("SameParameterValue") String title) {
         SignUpFragment fragment = new SignUpFragment();
         Bundle args = new Bundle();
@@ -35,6 +41,13 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
         fragment.setArguments(args);
         return fragment;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = (SignUpActivity)context;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +59,13 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
         findViewById(rootView);
         registerListenerId();
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        socialLoginController = new SocialLoginController(activity,view,
+                spinnerView, SignUpFragment.this, SignUpFragment.class.getSimpleName().toString());
     }
 
     private void findViewById(View view) {

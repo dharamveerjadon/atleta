@@ -15,6 +15,7 @@ public class Constants {
     public static final String SHOW_ALL = "all";
     public static final String FILE_TYPE_IMAGE = "Image";
     public static final int GALLERY_REQUEST = 8; // For Gallery
+    public static final int GOOGLE_CODE = 14;
     //---------------------Date Format-------------------------------------------------------------------------------------------------------------------
     public static final String DATE_FORMAT_EDDMMMYYYY = "EE, dd MMMM yyyy";
     public static final String DATE_FORMAT_yyyyMMDD = "yyyy-MM-dd'T'hh:mm:ss";
@@ -90,7 +91,7 @@ public class Constants {
     public static String device = "ANDROID";
 
 
-    public static final String BASE_URL = "https://www.obhee.co.in/public/api/";
+    public static final String BASE_URL = "http://www.obhee.co.in/public/";
 
 
 
