@@ -21,9 +21,6 @@ import com.atleta.customview.SpinnerView;
 import com.atleta.models.AddCommunityModel;
 import com.atleta.models.PostModel;
 import com.atleta.utils.AtletaApplication;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,32 +88,7 @@ public class CommunityFragment extends BaseFragment implements CommunityAdapter.
     private void getdata() {
         spinnerView.setVisibility(View.VISIBLE);
 
-            AtletaApplication.sharedDatabaseInstance().child("Community").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    List<AddCommunityModel> communityModels = new ArrayList<>();
-                    for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                        communityModels.add(postSnapshot.getValue(AddCommunityModel.class));
-                    }
-                    if (communityModels.size() > 0) {
-                        listRequirement.setVisibility(View.VISIBLE);
-                        noRecordFound.setVisibility(GONE);
 
-                        mAdapter.setItems(communityModels, 10);
-                    } else {
-                        listRequirement.setVisibility(GONE);
-                        noRecordFound.setVisibility(View.VISIBLE);
-                    }
-                    spinnerView.setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // calling on cancelled method when we receive
-                    // any error or we are not able to get the data.
-                    Toast.makeText(activity, "Fail to get data.", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
 
 

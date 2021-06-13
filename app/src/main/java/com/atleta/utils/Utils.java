@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -37,6 +38,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+
+import static com.atleta.utils.AtletaApplication.sharedInstance;
 
 
 public class Utils {
@@ -71,7 +74,19 @@ public class Utils {
 
         return trimmedMessage;
     }
-
+    /**
+     * Get device id
+     *
+     * @return device id
+     */
+    public static String getDeviceId() {
+        @SuppressLint("HardwareIds") String id = Settings.Secure.getString(sharedInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
+        if (TextUtils.isEmpty(id)) {
+            return java.util.UUID.randomUUID().toString();
+        } else {
+            return id;
+        }
+    }
     /**
      * show internet error based on the network available status
      *

@@ -46,9 +46,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -257,88 +254,7 @@ public class AddComunityDetailsFragment extends BaseFragment implements View.OnC
 
         spinnerView.setVisibility(View.VISIBLE);
         mProgressProfile.setVisibility(View.VISIBLE);
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        final Session session = AppPreferences.getSession();
-        String messagePushID = null;
-        if ("profile".equals(imageType)) {
-            messagePushID = session.getUserId() + "-profile" + System.currentTimeMillis() / 1000;
-        } else {
-            messagePushID = session.getUserId() + "-cover" + System.currentTimeMillis() / 1000;
-        }
 
-
-        dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("Uploading");
-        dialog.setCancelable(false);
-
-        // this will show message uploading
-        // while pdf is uploading
-        /*dialog.show();*/
-        // Here we are uploading the pdf in firebase storage with the name of current time
-        final StorageReference filepath = storageReference.child(messagePushID + "." + "pdf");
-        Uri uriPath = Uri.fromFile(new File(images.get(0).getPath()));
-        filepath.putFile(uriPath).continueWithTask((Continuation) task -> {
-            if (!task.isSuccessful()) {
-                throw task.getException();
-            }
-            return filepath.getDownloadUrl();
-        }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
-            if (task.isSuccessful()) {
-
-                final Uri uri = task.getResult();
-
-                if ("profile".equals(imageType)) {
-                    profileImageUrl = uri.toString();
-                    Glide.with(AtletaApplication.sharedInstance())
-                            .load(uri.toString())
-                            .listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    mProgressProfile.setVisibility(View.INVISIBLE);
-                                    spinnerView.setVisibility(View.GONE);
-                                    return false;
-                                }
-
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    mProgressProfile.setVisibility(View.INVISIBLE);
-                                    spinnerView.setVisibility(View.GONE);
-                                    return false;
-                                }
-                            })
-                            .placeholder(R.drawable.ic_avatar)
-                            .dontAnimate()
-                            .into(imgCommunityProfile);
-                } else {
-                    coverImageUrl = uri.toString();
-                    Glide.with(AtletaApplication.sharedInstance())
-                            .load(uri.toString())
-                            .listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    mProgressProfile.setVisibility(View.INVISIBLE);
-                                    spinnerView.setVisibility(View.GONE);
-                                    return false;
-                                }
-
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    mProgressProfile.setVisibility(View.INVISIBLE);
-                                    spinnerView.setVisibility(View.GONE);
-                                    return false;
-                                }
-                            })
-                            .placeholder(R.drawable.ic_avatar)
-                            .dontAnimate()
-                            .into(imgCommunityCover);
-                }
-
-            } else {
-                mProgressProfile.setVisibility(View.INVISIBLE);
-                spinnerView.setVisibility(View.GONE);
-                Utils.showToast(getActivity(), getActivity().findViewById(R.id.fragment_container), "Upload Failed");
-            }
-        });
 
     }
 
@@ -370,22 +286,7 @@ public class AddComunityDetailsFragment extends BaseFragment implements View.OnC
 
     private void sendDataToFirebase() {
 
-        DatabaseReference addCommunity = AtletaApplication.sharedDatabaseInstance().child("Community");
-        if(addCommunity != null) {
-            final String key = addCommunity.push().getKey();
-            final Session session = AppPreferences.getSession();
 
-            AddCommunityModel addCommunityModel = new AddCommunityModel(key, mEdtCommunityName.getText().toString().trim(), mSpinnerTopic, mEdtAboutCommunity.getText().toString().trim(), mCommunityVisibility, mSpinnerScope, profileImageUrl, coverImageUrl, session.getUserId() );
-            addCommunity.child(key).setValue(addCommunityModel)
-                    .addOnSuccessListener(aVoid -> {
-                        spinnerView.setVisibility(View.GONE);
-                        pushFragment(InvitationFragment.newInstance("Invitation"), true);
-
-                    })
-                    .addOnFailureListener(e ->
-                            spinnerView.setVisibility(View.GONE)
-                    );
-        }
     }
 
     public class HandleImagePicked extends AsyncTask<List<String>, Void, List<Image>> {

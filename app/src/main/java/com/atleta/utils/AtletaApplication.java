@@ -1,14 +1,14 @@
 package com.atleta.utils;
 
 import android.app.Application;
+import android.text.TextUtils;
 
-import com.atleta.api.AtletaApiClient;
-import com.atleta.api.AtletaApiServices;
-import com.atleta.api.HttpsTrustManager;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 
 public class AtletaApplication extends Application {
@@ -19,33 +19,87 @@ public class AtletaApplication extends Application {
     private static final int DEFAULT_TIMEOUT_MS = 10000;
 
     private final String TAG = AtletaApplication.class.getSimpleName();
-
+    private RequestQueue mRequestQueue;
     private static AtletaApplication mSharedInstance;
-    private static DatabaseReference mDatabase;
-    private static AtletaApiServices atletaApiServices;
-
 
     public static AtletaApplication sharedInstance() {
         return mSharedInstance;
     }
-    public static DatabaseReference sharedDatabaseInstance() {
-        return mDatabase;
-    }
 
-    public static AtletaApiServices sharedAtletaApiServicesInstance() {
-        return atletaApiServices;
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
         mSharedInstance = this;
         AppPreferences.init(this);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        atletaApiServices = AtletaApiClient.getClient(this)
-                .create(AtletaApiServices.class);
-
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
     }
+
+    /**
+     * Request Queue is provided to add new request
+     *
+     * @return Request Queue
+     */
+    public RequestQueue getRequestQueue() {
+
+        if (mRequestQueue == null) {
+
+            synchronized (this) {
+
+                if (mRequestQueue == null) {
+
+                    mRequestQueue = Volley.newRequestQueue(AtletaApplication.sharedInstance());
+                }
+            }
+        }
+
+        return mRequestQueue;
+    }
+
+
+    /**
+     * Add your request to request queue
+     *
+     * @param req Request
+     * @param tag String
+     */
+    public <T> void addToRequestQueue(Request<T> req, String tag) {
+        // set the default tag if tag is empty
+        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
+        req.setRetryPolicy(new DefaultRetryPolicy(
+                DEFAULT_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        getRequestQueue().add(req);
+    }
+
+
+    /**
+     * Add your request to request queue
+     *
+     * @param req Request
+     */
+    public <T> void addToRequestQueue(Request<T> req) {
+        req.setTag(TAG);
+        req.setRetryPolicy(new DefaultRetryPolicy(
+                DEFAULT_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        getRequestQueue().add(req);
+    }
+
+
+    /**
+     * Cancel your request from request queue
+     *
+     * @param tag String
+     */
+    public void cancelPendingRequests(Object tag) {
+        if (mRequestQueue != null) {
+            mRequestQueue.cancelAll(tag);
+        }
+    }
+
+
 }

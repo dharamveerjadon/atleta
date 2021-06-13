@@ -84,7 +84,7 @@
                     style="@style/AppTheme.TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/login_id"
+                    android:text="@string/email_id"
                     android:padding="4sp"
                     app:appFont="Poppins-Regular"
                     android:textColor="@color/colorAccent"
@@ -98,8 +98,8 @@
                     android:background="@drawable/border_edit_text"
                     android:padding="12dp"
                     app:appFont="Poppins-Regular"
-                    android:hint="Enter mobile number here"
-                    android:inputType="number"
+                    android:hint="Enter email id here"
+                    android:inputType="textEmailAddress"
                     android:textColor="@android:color/black" />
 
                 <com.atleta.customview.AtletaTextView

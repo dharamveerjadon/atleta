@@ -11,6 +11,10 @@
     <string name="don_t_have_an_account">Don\'t have an account</string>
     <string name="sign_up">Sign Up</string>
     <string name="password">Password</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="dob">Date of birth</string>
     <string name="login_id">Login ID</string>
     <string name="sign_in_to_continue">Sign in to continue</string>
     <string name="welcome">Welcome</string>

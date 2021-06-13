@@ -8,46 +8,35 @@ import java.io.Serializable;
 public class Session implements Parcelable {
 
     private String userId;
-    private String displayName;
+    private String name;
     private String emailId;
-    private String createPassword;
-    private String repeatpassword;
+    private String password;
+    private String gender;
     private String number;
     private String dob;
-    private UserModel userModel;
-    private String userToken;
-    private String actionType;
     private boolean isAdmin = false;
 
-    /**
-     * Provides Current user
-     *
-     * @return User
-     */
-    public UserModel getCurrentUser() {
-        return userModel;
-    }
 
 
 public Session() {}
 
-
-    public Session( String mobileNumber, UserModel userModel, String userToken) {
-        this.userModel = userModel;
-        this.userToken = userToken;
+    public Session(String name, String emailId, String password, String gender, String dob) {
+        this.name = name;
+        this.emailId = emailId;
+        this.password = password;
+        this.gender = gender;
+        this.dob = dob;
     }
-
 
     protected Session(Parcel in) {
         userId = in.readString();
         emailId = in.readString();
-        createPassword = in.readString();
         number = in.readString();
-        createPassword = in.readString();
-        repeatpassword = in.readString();
-        userToken = in.readString();
+        password = in.readString();
+        gender = in.readString();
+        dob = in.readString();
         isAdmin = in.readByte() != 0;
-        actionType = in.readString();
+        name = in.readString();
     }
 
     public static final Creator<Session> CREATOR = new Creator<Session>() {
@@ -62,8 +51,44 @@ public Session() {}
         }
     };
 
-    public void setActionType(String actionType) {
-        this.actionType = actionType;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
     public void setUserId(String userId) {
@@ -72,23 +97,6 @@ public Session() {}
 
     public void setEmailId(String emailId) {
         this.emailId = emailId;
-    }
-
-    public void setCreatePassword(String createPassword) {
-        this.createPassword = createPassword;
-    }
-
-    public void setRepeatpassword(String repeatpassword) {
-        this.repeatpassword = repeatpassword;
-    }
-
-
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
-    }
-
-    public void setUserToken(String userToken) {
-        this.userToken = userToken;
     }
 
     public void setAdmin(boolean admin) {
@@ -107,34 +115,6 @@ public Session() {}
         return emailId;
     }
 
-    public String getCreatePassword() {
-        return createPassword;
-    }
-
-    public String getRepeatpassword() {
-        return repeatpassword;
-    }
-
-    public UserModel getUserModel() {
-        return userModel;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public String getActionType() {
-        return actionType;
-    }
-
-    public String getUserToken() {
-        return userToken;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -143,12 +123,12 @@ public Session() {}
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(userId);
-        dest.writeString(displayName);
+        dest.writeString(name);
         dest.writeString(emailId);
-        dest.writeString(createPassword);
-        dest.writeString(repeatpassword);
-        dest.writeString(userToken);
-        dest.writeString(actionType);
+        dest.writeString(password);
+        dest.writeString(gender);
+        dest.writeString(number);
+        dest.writeString(dob);
         dest.writeByte((byte) (isAdmin ? 1 : 0));
     }
 }

@@ -38,188 +38,235 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:orientation="vertical"
-                android:padding="24dp">
-
-                <com.atleta.customview.AtletaTextView
-                    style="@style/AppTheme.TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sign_up_text"
-                    android:textColor="@android:color/black"
-                    android:textSize="40sp"
-                    app:appFont="Poppins-Bold"
-                    android:textFontWeight="700"
-                    />
-
-                <com.atleta.customview.AtletaTextView
-                    style="@style/AppTheme.TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sign_up_to_get_started"
-                    android:textColor="@android:color/black"
-                    app:appFont="Poppins-Regular"
-                    android:textSize="23sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                android:padding="24dp">
-
-                <com.atleta.customview.AtletaTextView
-                    style="@style/AppTheme.TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="4sp"
-                    android:text="Name"
-                    app:appFont="Poppins-Regular"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp" />
-
-                <com.atleta.customview.AtletaEditText
-                    style="@style/AppTheme.EditText"
-                    android:id="@+id/edt_display_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border_edit_text"
-                    android:inputType="text"
-                    app:appFont="Poppins-Regular"
-                    android:padding="12dp"
-                    android:textColor="@android:color/black" />
-
-
-                <com.atleta.customview.AtletaTextView
-                    style="@style/AppTheme.TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="4sp"
-                    android:text="@string/email_id"
-                    app:appFont="Poppins-Regular"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp" />
-
-                <com.atleta.customview.AtletaEditText
-                    style="@style/AppTheme.EditText"
-                    android:id="@+id/edt_email_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border_edit_text"
-                    android:inputType="text"
-                    app:appFont="Poppins-Regular"
-                    android:padding="12dp"
-                    android:textColor="@android:color/black" />
-
-                <com.atleta.customview.AtletaTextView
-                    style="@style/AppTheme.TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:padding="4sp"
-                    app:appFont="Poppins-Regular"
-                    android:text="@string/create_password"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp" />
-
-                <com.atleta.customview.AtletaEditText
-                    style="@style/AppTheme.EditText"
-                    android:id="@+id/edt_create_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border_edit_text"
-                    android:inputType="textPassword"
-                    android:padding="12dp"
-                    app:appFont="Poppins-Regular"
-                    android:textColor="@android:color/black" />
-
-                <com.atleta.customview.AtletaTextView
-                    style="@style/AppTheme.TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:padding="4sp"
-                    app:appFont="Poppins-Regular"
-                    android:text="@string/repeat_password"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp" />
-
-                <com.atleta.customview.AtletaEditText
-                    style="@style/AppTheme.EditText"
-                    android:id="@+id/edt_repeat_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border_edit_text"
-                    android:inputType="text"
-                    app:appFont="Poppins-Regular"
-                    android:padding="12dp"
-                    android:textColor="@android:color/black" />
-
-                <com.atleta.customview.AtletaButton
-                    style="@style/AppTheme.Button"
-                    android:id="@+id/btn_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="24dp"
-                    android:layout_marginTop="18dp"
-                    android:background="@drawable/border_button_orange"
-                    android:elevation="4dp"
-                    app:appFont="Poppins-Regular"
-                    android:textColor="@android:color/white"
-                    android:text="Next"
-                    android:textAllCaps="false" />
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-                    <RadioGroup
-                        android:id="@+id/rg_login"
+                    android:layout_marginTop="36dp"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="top|center"
-                        android:orientation="horizontal"
-                        android:paddingBottom="@dimen/padding_default_double"
-                        android:paddingTop="@dimen/padding_default_double">
+                        android:text="@string/sign_up_text"
+                        android:textColor="@android:color/black"
+                        android:textFontWeight="700"
+                        android:textSize="40sp"
+                        app:appFont="Poppins-Bold" />
 
-                        <RadioButton
-                            android:id="@+id/rbtn_fb"
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sign_up_to_get_started"
+                        android:textColor="@android:color/black"
+                        android:textSize="23sp"
+                        app:appFont="Poppins-Regular" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4sp"
+                        android:text="Name"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp"
+                        app:appFont="Poppins-Regular" />
+
+                    <com.atleta.customview.AtletaEditText
+                        android:id="@+id/edt_display_name"
+                        style="@style/AppTheme.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_edit_text"
+                        android:inputType="text"
+                        android:padding="12dp"
+                        android:text="name"
+                        android:textColor="@android:color/black"
+                        app:appFont="Poppins-Regular" />
+
+
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4sp"
+                        android:text="@string/email_id"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp"
+                        app:appFont="Poppins-Regular" />
+
+                    <com.atleta.customview.AtletaEditText
+                        android:id="@+id/edt_email_id"
+                        style="@style/AppTheme.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_edit_text"
+                        android:inputType="text"
+                        android:padding="12dp"
+                        android:text="name@gmail.com"
+                        android:textColor="@android:color/black"
+                        app:appFont="Poppins-Regular" />
+
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:padding="4sp"
+                        android:text="@string/password"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp"
+                        app:appFont="Poppins-Regular" />
+
+                    <com.atleta.customview.AtletaEditText
+                        android:id="@+id/edt_create_password"
+                        style="@style/AppTheme.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_edit_text"
+                        android:inputType="textPassword"
+                        android:padding="12dp"
+                        android:text="name"
+                        android:textColor="@android:color/black"
+                        app:appFont="Poppins-Regular" />
+
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:padding="4sp"
+                        android:text="@string/gender"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp"
+                        app:appFont="Poppins-Regular" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <com.atleta.customview.AtletaButton
+                            android:id="@+id/btn_male"
+                            style="@style/AppTheme.Button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/margin_default"
-                            android:layout_marginStart="@dimen/margin_default"
-                            android:button="@null"
-                            android:drawableLeft="@drawable/ic_facebook" />
+                            android:layout_gravity="center"
+                            android:layout_margin="24dp"
+                            android:background="@drawable/border_button_orange"
+                            android:elevation="4dp"
+                            android:text="Male"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            app:appFont="Poppins-Regular" />
 
-                        <RadioButton
-                            android:id="@+id/rbtn_gplus"
+                        <com.atleta.customview.AtletaButton
+                            android:id="@+id/btn_female"
+                            style="@style/AppTheme.Button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/margin_default"
-                            android:layout_marginStart="@dimen/margin_default"
-                            android:button="@null"
-                            android:drawableLeft="@drawable/ic_google" />
+                            android:layout_gravity="center"
+                            android:layout_margin="24dp"
+                            android:background="@drawable/border_button_black"
+                            android:elevation="4dp"
+                            android:text="Female"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            app:appFont="Poppins-Regular" />
+                    </LinearLayout>
 
-                    </RadioGroup>
+                    <com.atleta.customview.AtletaTextView
+                        style="@style/AppTheme.TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:padding="4sp"
+                        android:text="@string/dob"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp"
+                        app:appFont="Poppins-Regular" />
+
+                    <DatePicker
+                        android:id="@+id/datePicker1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:datePickerMode="spinner"
+                        android:calendarViewShown="false"/>
+                    <com.atleta.customview.AtletaButton
+                        android:id="@+id/btn_register"
+                        style="@style/AppTheme.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="24dp"
+                        android:layout_marginTop="18dp"
+                        android:background="@drawable/border_button_orange"
+                        android:elevation="4dp"
+                        android:text="Next"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        app:appFont="Poppins-Regular" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:id="@+id/rg_login"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top|center"
+                            android:orientation="horizontal"
+                            android:paddingTop="@dimen/padding_default_double"
+                            android:paddingBottom="@dimen/padding_default_double">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_fb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_default"
+                                android:layout_marginEnd="@dimen/margin_default"
+                                android:button="@null"
+                                android:drawableLeft="@drawable/ic_facebook" />
+
+                            <RadioButton
+                                android:id="@+id/rbtn_gplus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_default"
+                                android:layout_marginEnd="@dimen/margin_default"
+                                android:button="@null"
+                                android:drawableLeft="@drawable/ic_google" />
+
+                        </RadioGroup>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-</ScrollView>
+        </ScrollView>
     </FrameLayout>
 
     <com.atleta.customview.SpinnerView
@@ -227,5 +274,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 </RelativeLayout>

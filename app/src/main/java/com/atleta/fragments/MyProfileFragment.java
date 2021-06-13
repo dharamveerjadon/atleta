@@ -30,11 +30,6 @@ import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.atleta.R;
 import com.atleta.activities.HomeActivity;
 import com.atleta.customview.SpinnerView;
@@ -100,31 +95,6 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
         // for getting the values from database.
         Session session = AppPreferences.getSession();
         if (session != null) {
-            AtletaApplication.sharedDatabaseInstance().child("Users").child(session.getUserId()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    // this method is call to get the realtime
-                    // updates in the data.
-                    // this method is called when the data is
-                    // changed in our Firebase console.
-                    // below line is for getting the data from
-                    // snapshot of our database.
-                    Session value = snapshot.getValue(Session.class);
-
-                    // after getting the value we are setting
-                    // our value to our text view in below line.
-                    AppPreferences.setSession(value);
-
-                    initData();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // calling on cancelled method when we receive
-                    // any error or we are not able to get the data.
-                    Toast.makeText(getContext(), "Fail to get data.", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
 
     }
@@ -171,30 +141,15 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
                     spinnerView.setVisibility(View.VISIBLE);
                     mProgressBar.setVisibility(View.VISIBLE);
                     imageuri = data.getData();
-                    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
                     final Session session = AppPreferences.getSession();
                     final String messagePushID = session.getUserId() + "-profile";
 
                     dialog = new ProgressDialog(activity);
                     dialog.setMessage("Uploading");
                     dialog.setCancelable(false);
-
-                    // this will show message uploading
-                    // while pdf is uploading
-                    /*dialog.show();*/
-                    // Here we are uploading the pdf in firebase storage with the name of current time
-                    final StorageReference filepath = storageReference.child(messagePushID + "." + "pdf");
-                    filepath.putFile(imageuri).continueWithTask((Continuation) task -> {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-                        }
-                        return filepath.getDownloadUrl();
-                    }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
-                        if (task.isSuccessful()) {
-                            final Uri uri = task.getResult();
-
                             activity.sendBroadcast(new Intent(Keys.BROADCAST_PROFILE_IMAGE));
-                            Glide.with(AtletaApplication.sharedInstance())
+                           /* Glide.with(AtletaApplication.sharedInstance())
                                     .load(uri.toString())
                                     .listener(new RequestListener<Drawable>() {
                                         @Override
@@ -213,11 +168,9 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
                                     })
                                     .placeholder(R.drawable.ic_avatar)
                                     .dontAnimate()
-                                    .into(profileImageView);
+                                    .into(profileImageView);*/
                         } else {
                             Utils.showToast(activity, activity.findViewById(R.id.fragment_container), "Upload Failed");
-                        }
-                    });
                 }
                 break;
 
@@ -227,7 +180,7 @@ public class MyProfileFragment extends BaseFragment implements View.OnClickListe
     private void initData() {
 
         Session session = AppPreferences.getSession();
-        mTxtName.setText(session.getDisplayName());
+        mTxtName.setText(session.getName());
 
         spinnerView.setVisibility(View.GONE);
     }

@@ -51,10 +51,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 import static com.atleta.activities.HomeActivity.mGoogleApiClient;
 
-/*
-import static com.truckland.android.activities.ApplicationClass.twitterClient;
-*/
-
 /**
  * Created by dharamveer on 11/06/2021.
  */
@@ -116,9 +112,9 @@ public class SocialLoginController implements View.OnClickListener {
 
     }
 
-    private static Scope buildScope() {
+    /*private static Scope buildScope() {
         return Scope.build(Scope.R_BASICPROFILE, Scope.R_EMAILADDRESS);
-    }
+    }*/
 
     /**
      * Find the view ids.

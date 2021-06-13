@@ -50,10 +50,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
@@ -174,8 +170,6 @@ public class HomeActivity extends BaseActivity implements MenuItemInteraction , 
 
         new Handler().postDelayed(() -> onHandleNotification(getIntent()), 1000);
 
-
-        getdata(session);
         googlePlusInitalize();
         lnrEditIconProfile.setOnClickListener(v -> {
             Session editSession = AppPreferences.getSession();
@@ -210,25 +204,6 @@ public class HomeActivity extends BaseActivity implements MenuItemInteraction , 
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         onHandleNotification(intent);
-    }
-
-    private void getdata(Session session) {
-
-        DatabaseReference databaseReference = AtletaApplication.sharedDatabaseInstance().child("Users").child(session.getUserId());
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Session value = snapshot.getValue(Session.class);
-                AppPreferences.setSession(value);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // calling on cancelled method when we receive
-                // any error or we are not able to get the data.
-                Toast.makeText(HomeActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     /**

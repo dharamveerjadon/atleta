@@ -11,29 +11,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
-
-import com.atleta.activities.HomeActivity;
 import com.atleta.activities.SignUpActivity;
 import com.atleta.controllers.SocialLoginController;
-import com.google.firebase.database.DatabaseReference;
 import com.atleta.R;
 import com.atleta.customview.SpinnerView;
 import com.atleta.models.Session;
-import com.atleta.models.UserModel;
-import com.atleta.utils.AppPreferences;
-import com.atleta.utils.AtletaApplication;
 import com.atleta.utils.Utils;
 
 public class SignUpFragment extends BaseFragment implements View.OnClickListener {
 
-    private EditText mEdtDisplayName, mEdtEmailId, mEdtCreatePassword, mEdtRepeatPassword;
-    private Button mBtnRegister;
+    private EditText mEdtDisplayName, mEdtEmailId, mEdtCreatePassword;
+    private Button mBtnRegister, mBtnMale, mBtnFemale;
     private SpinnerView spinnerView;
+    private DatePicker datePicker;
     private SignUpActivity activity;
     public SocialLoginController socialLoginController;
+    private boolean isMaleCheck = true;
     public static SignUpFragment newInstance(@SuppressWarnings("SameParameterValue") String title) {
         SignUpFragment fragment = new SignUpFragment();
         Bundle args = new Bundle();
@@ -71,14 +68,18 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
     private void findViewById(View view) {
         mEdtEmailId = view.findViewById(R.id.edt_email_id);
         mEdtCreatePassword = view.findViewById(R.id.edt_create_password);
-        mEdtRepeatPassword = view.findViewById(R.id.edt_repeat_password);
         mEdtDisplayName = view.findViewById(R.id.edt_display_name);
+        mBtnMale = view.findViewById(R.id.btn_male);
+        mBtnFemale = view.findViewById(R.id.btn_female);
+        datePicker = view.findViewById(R.id.datePicker1);
         mBtnRegister = view.findViewById(R.id.btn_register);
         spinnerView = view.findViewById(R.id.spinnerView);
     }
 
     private void registerListenerId() {
 
+        mBtnMale.setOnClickListener(this);
+        mBtnFemale.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
     }
 
@@ -87,22 +88,24 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
 
         switch (v.getId()) {
             case R.id.btn_register:
-                if (!isValidation()) {
+                if (isValidation()) {
                     spinnerView.setVisibility(View.VISIBLE);
-                    String userId = mEdtEmailId.getText().toString().trim();
                     String displayName = mEdtDisplayName.getText().toString().trim();
                     String emailId = mEdtEmailId.getText().toString().trim();
                     String password = mEdtCreatePassword.getText().toString().trim();
-                    String repeatPassword = mEdtRepeatPassword.getText().toString().trim();
-                    boolean isAdmin = false;
+                    String gender = isMaleCheck ? "male" : "female";
+                    String dob = datePicker.getDayOfMonth()+"/"+ (datePicker.getMonth() + 1)+"/"+datePicker.getYear();
+
+                    Session session = new Session(displayName, emailId, password, gender, dob);
+
                     new Handler().postDelayed(() -> {
                         spinnerView.setVisibility(View.GONE);
-                        pushFragment(SelectSportsType.newInstance(""), true);
+                        pushFragment(SelectSportsType.newInstance("", session), true);
                     }, 3000);
-
                 }
-
                 break;
+            case R.id.btn_male:changeGenderState(R.id.btn_male); break;
+            case R.id.btn_female:changeGenderState(R.id.btn_female); break;
         }
     }
 
@@ -139,21 +142,21 @@ public class SignUpFragment extends BaseFragment implements View.OnClickListener
         } else {
             mEdtCreatePassword.setError(null);
         }
-        if (TextUtils.isEmpty(mEdtRepeatPassword.getText().toString().trim())) {
-            mEdtRepeatPassword.setError("Enter repeat password here..");
-            mEdtRepeatPassword.requestFocus();
-            return false;
-        } else {
-            mEdtRepeatPassword.setError(null);
-        }
-
-        if(!mEdtRepeatPassword.getText().toString().trim().equals(mEdtCreatePassword.getText().toString().trim())) {
-            mEdtRepeatPassword.setError("Enter correct repeat password here..");
-            mEdtRepeatPassword.requestFocus();
-            return false;
-        }else {
-            mEdtRepeatPassword.setError(null);
-        }
         return true;
+    }
+
+    private void changeGenderState(int id) {
+        switch(id) {
+            case R.id.btn_male:
+                isMaleCheck = true;
+                mBtnMale.setBackground(getResources().getDrawable(R.drawable.border_button_orange));
+                mBtnFemale.setBackground(getResources().getDrawable(R.drawable.border_button_black));
+                break;
+            case R.id.btn_female:
+                isMaleCheck = false;
+                mBtnFemale.setBackground(getResources().getDrawable(R.drawable.border_button_orange));
+                mBtnMale.setBackground(getResources().getDrawable(R.drawable.border_button_black));
+                break;
+        }
     }
 }

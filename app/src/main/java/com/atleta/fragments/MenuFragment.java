@@ -80,9 +80,9 @@ public class MenuFragment extends BaseFragment {
     private void setImageOnView() {
         Session session = AppPreferences.getSession();
 
-        if (session != null && session.getUserModel() != null ) {
+        if (session != null  ) {
 
-            Glide.with(AtletaApplication.sharedInstance())
+           /* Glide.with(AtletaApplication.sharedInstance())
                     .load(session.getUserModel().getProfile_image_url())
                     .placeholder(R.drawable.ic_avatar) // can also be a drawable
                     .error(R.drawable.ic_avatar) // will be displayed if the image cannot be loaded
@@ -98,7 +98,7 @@ public class MenuFragment extends BaseFragment {
                             return false;
                         }
                     })
-                    .into(mImvMember);
+                    .into(mImvMember);*/
 
         }
 

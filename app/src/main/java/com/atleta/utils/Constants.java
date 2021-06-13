@@ -91,7 +91,9 @@ public class Constants {
     public static String device = "ANDROID";
 
 
-    public static final String BASE_URL = "http://www.obhee.co.in/public/";
+    public static final String BASE_URL = "http://www.obhee.co.in/public/api/";
+    public static final String SIGN_UP = BASE_URL + "sign-up";
+    public static final String LOGIN = BASE_URL + "login";
 
 
 
